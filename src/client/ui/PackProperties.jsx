@@ -108,10 +108,8 @@ class PackProperties extends React.Component {
 		return data;
 	}
 
-	saveOptions(force = false) {
-		if (PLATFORM === "web" || force) {
-			Storage.save(STORAGE_OPTIONS_KEY, this.packOptions);
-		}
+	saveOptions() {
+		Storage.save(STORAGE_OPTIONS_KEY, this.packOptions);
 	}
 
 	componentDidMount() {
@@ -463,10 +461,7 @@ class PackProperties extends React.Component {
 									></div>
 								</td>
 							</tr>
-							<tr
-								title={I18.f("FILE_NAME_TITLE")}
-								style={{ display: PLATFORM === "web" ? "" : "none" }}
-							>
+							<tr title={I18.f("FILE_NAME_TITLE")}>
 								<td>{I18.f("FILE_NAME")}</td>
 								<td>
 									<input
@@ -478,27 +473,6 @@ class PackProperties extends React.Component {
 									/>
 								</td>
 								<td></td>
-							</tr>
-							<tr
-								title={I18.f("SAVE_PATH_TITLE")}
-								style={{ display: PLATFORM === "electron" ? "" : "none" }}
-							>
-								<td>{I18.f("SAVE_PATH")}</td>
-								<td>
-									<input
-										ref="savePath"
-										className="border-color-gray"
-										type="text"
-										defaultValue={this.packOptions.savePath}
-										onBlur={this.onExporterPropChanged}
-									/>
-								</td>
-								<td>
-									<div
-										className="folder-btn back-800"
-										onClick={this.selectSavePath}
-									></div>
-								</td>
 							</tr>
 							<tr>
 								<td colSpan="3" className="center-align">

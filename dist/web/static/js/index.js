@@ -265,12 +265,6 @@ module.exports = !__webpack_require__(5)(function () {
 
 /***/ }),
 /* 10 */
-/***/ (function(module) {
-
-module.exports = JSON.parse("{\"name\":\"free-tex-packer\",\"displayName\":\"Free texture packer\",\"version\":\"0.6.7\",\"description\":\"Free online texture packer\",\"url\":\"http://free-tex-packer.com\",\"download\":\"http://free-tex-packer.com/download\",\"webApp\":\"http://free-tex-packer.com/app\",\"main\":\"src/index.js\",\"tinifyUrl\":\"http://free-tex-packer.com/server/tinify.php\",\"localizations\":[\"en\",\"es\",\"ru\",\"zh-cn\",\"de\"],\"contributors\":[{\"name\":\"Alexander Norinchak\",\"homepage\":\"https://github.com/odrick\"},{\"name\":\"Rubén\",\"homepage\":\"https://github.com/rtalon83\"},{\"name\":\"Querijn Heijmans\",\"homepage\":\"https://github.com/Querijn\"},{\"name\":\"Timo Kämäräinen\",\"homepage\":\"https://github.com/qtiki\"},{\"name\":\"Andrzej Kilijański\",\"homepage\":\"https://github.com/and3md\"},{\"name\":\"TheDarkMen3000\",\"homepage\":\"https://github.com/TheDarkMen3000\"},{\"name\":\"wen-\",\"homepage\":\"https://github.com/wen-\"},{\"name\":\"Davide Matta aka DadeKuma\",\"homepage\":\"https://github.com/DadeKuma\"}],\"scripts\":{\"start\":\"webpack-dev-server --host 127.0.0.1 --port 4000\",\"start-electron\":\"webpack-dev-server --host 127.0.0.1 --port 4000 --platform electron\",\"build-web\":\"webpack --build --platform web\",\"build-electron\":\"webpack --build --platform electron\"},\"repository\":{\"type\":\"git\",\"url\":\"git+https://github.com/odrick/free-tex-packer.git\"},\"keywords\":[\"texture\",\"packer\",\"texturepacker\",\"texture-packer\",\"sprites\",\"spritesheet\",\"export\",\"sprite\",\"2d\"],\"author\":\"Alexander Norinchak\",\"authorSite\":\"https://github.com/odrick/\",\"authorEmail\":\"norinchak@gmail.com\",\"license\":\"ISC\",\"bugs\":{\"url\":\"https://github.com/odrick/free-tex-packer/issues\"},\"homepage\":\"https://github.com/odrick/free-tex-packer\",\"devDependencies\":{\"@babel/core\":\"^7.6.4\",\"@babel/preset-env\":\"^7.6.3\",\"@babel/preset-react\":\"^7.7.4\",\"@jvitela/mustache-wax\":\"^1.0.1\",\"babel-loader\":\"^8.0.5\",\"babel-plugin-transform-runtime\":\"^6.23.0\",\"babel-polyfill\":\"^6.23.0\",\"babel-preset-es2015\":\"^6.24.0\",\"babel-preset-stage-0\":\"^6.22.0\",\"babel-runtime\":\"^6.23.0\",\"chokidar\":\"^2.0.4\",\"copy-webpack-plugin\":\"^4.6.0\",\"electron\":\"^4.0.4\",\"eventemitter3\":\"^3.0.1\",\"file-saver\":\"^2.0.0\",\"glob\":\"^7.1.1\",\"json-loader\":\"^0.5.4\",\"jszip\":\"^3.1.3\",\"maxrects-packer\":\"^2.7.2\",\"mustache\":\"^4.2.0\",\"optimist\":\"^0.6.1\",\"plist\":\"^3.0.1\",\"react\":\"^16.8.1\",\"react-dom\":\"^16.8.1\",\"webpack\":\"^4.29.3\",\"webpack-cli\":\"^3.2.3\",\"webpack-dev-server\":\"^3.1.14\",\"xml2js\":\"^0.4.19\"}}");
-
-/***/ }),
-/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var anObject = __webpack_require__(3);
@@ -290,6 +284,12 @@ exports.f = __webpack_require__(9) ? Object.defineProperty : function defineProp
   return O;
 };
 
+
+/***/ }),
+/* 11 */
+/***/ (function(module) {
+
+module.exports = JSON.parse("{\"name\":\"free-tex-packer\",\"displayName\":\"Free texture packer\",\"version\":\"0.6.7\",\"description\":\"Free online texture packer\",\"url\":\"http://free-tex-packer.com\",\"download\":\"http://free-tex-packer.com/download\",\"webApp\":\"http://free-tex-packer.com/app\",\"main\":\"src/index.js\",\"tinifyUrl\":\"http://free-tex-packer.com/server/tinify.php\",\"localizations\":[\"en\",\"es\",\"ru\",\"zh-cn\",\"de\"],\"contributors\":[{\"name\":\"Alexander Norinchak\",\"homepage\":\"https://github.com/odrick\"},{\"name\":\"Rubén\",\"homepage\":\"https://github.com/rtalon83\"},{\"name\":\"Querijn Heijmans\",\"homepage\":\"https://github.com/Querijn\"},{\"name\":\"Timo Kämäräinen\",\"homepage\":\"https://github.com/qtiki\"},{\"name\":\"Andrzej Kilijański\",\"homepage\":\"https://github.com/and3md\"},{\"name\":\"TheDarkMen3000\",\"homepage\":\"https://github.com/TheDarkMen3000\"},{\"name\":\"wen-\",\"homepage\":\"https://github.com/wen-\"},{\"name\":\"Davide Matta aka DadeKuma\",\"homepage\":\"https://github.com/DadeKuma\"},{\"name\":\"Tobias Berger\",\"url\":\"https://tobot.dev\",\"email\":\"toby@tobot.dev\"}],\"scripts\":{\"start\":\"webpack-dev-server --host 127.0.0.1 --port 4000\",\"build\":\"webpack --build\"},\"repository\":{\"type\":\"git\",\"url\":\"git+https://github.com/Toby222/free-tex-packer.git\"},\"keywords\":[\"texture\",\"packer\",\"texturepacker\",\"texture-packer\",\"sprites\",\"spritesheet\",\"export\",\"sprite\",\"2d\"],\"author\":\"Tobias Berger\",\"authorSite\":\"https://github.com/Toby222/\",\"authorEmail\":\"toby@tobot.dev\",\"license\":\"ISC\",\"bugs\":{\"url\":\"https://github.com/Toby222/free-tex-packer/issues\"},\"homepage\":\"https://github.com/Toby222/free-tex-packer\",\"devDependencies\":{\"@babel/core\":\"^7.6.4\",\"@babel/preset-env\":\"^7.6.3\",\"@babel/preset-react\":\"^7.7.4\",\"@jvitela/mustache-wax\":\"^1.0.1\",\"babel-loader\":\"^8.0.5\",\"babel-plugin-transform-runtime\":\"^6.23.0\",\"babel-polyfill\":\"^6.23.0\",\"babel-preset-es2015\":\"^6.24.0\",\"babel-preset-stage-0\":\"^6.22.0\",\"babel-runtime\":\"^6.23.0\",\"chokidar\":\"^2.0.4\",\"copy-webpack-plugin\":\"^4.6.0\",\"eventemitter3\":\"^3.0.1\",\"file-saver\":\"^2.0.0\",\"glob\":\"^7.1.1\",\"json-loader\":\"^0.5.4\",\"jszip\":\"^3.1.3\",\"maxrects-packer\":\"^2.7.2\",\"mustache\":\"^4.2.0\",\"optimist\":\"^0.6.1\",\"plist\":\"^3.0.1\",\"react\":\"^16.8.1\",\"react-dom\":\"^16.8.1\",\"webpack\":\"^4.29.3\",\"webpack-cli\":\"^3.2.3\",\"webpack-dev-server\":\"^3.1.14\",\"xml2js\":\"^0.4.19\"}}");
 
 /***/ }),
 /* 12 */
@@ -376,7 +376,7 @@ module.exports = function (it) {
 /* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var dP = __webpack_require__(11);
+var dP = __webpack_require__(10);
 var createDesc = __webpack_require__(42);
 module.exports = __webpack_require__(9) ? function (object, key, value) {
   return dP.f(object, key, createDesc(1, value));
@@ -2544,7 +2544,7 @@ if (__webpack_require__(9)) {
   var setSpecies = __webpack_require__(48);
   var arrayFill = __webpack_require__(113);
   var arrayCopyWithin = __webpack_require__(173);
-  var $DP = __webpack_require__(11);
+  var $DP = __webpack_require__(10);
   var $GOPD = __webpack_require__(21);
   var dP = $DP.f;
   var gOPD = $GOPD.f;
@@ -3242,7 +3242,7 @@ module.exports = false;
 var META = __webpack_require__(43)('meta');
 var isObject = __webpack_require__(6);
 var has = __webpack_require__(19);
-var setDesc = __webpack_require__(11).f;
+var setDesc = __webpack_require__(10).f;
 var id = 0;
 var isExtensible = Object.isExtensible || function () {
   return true;
@@ -3425,7 +3425,7 @@ exports.f = Object.getOwnPropertyNames || function getOwnPropertyNames(O) {
 "use strict";
 
 var global = __webpack_require__(4);
-var dP = __webpack_require__(11);
+var dP = __webpack_require__(10);
 var DESCRIPTORS = __webpack_require__(9);
 var SPECIES = __webpack_require__(7)('species');
 
@@ -3643,7 +3643,7 @@ Duplex.prototype._destroy = function (err, cb) {
 /* 54 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var def = __webpack_require__(11).f;
+var def = __webpack_require__(10).f;
 var has = __webpack_require__(19);
 var TAG = __webpack_require__(7)('toStringTag');
 
@@ -8710,7 +8710,7 @@ var global = __webpack_require__(4);
 var core = __webpack_require__(25);
 var LIBRARY = __webpack_require__(39);
 var wksExt = __webpack_require__(157);
-var defineProperty = __webpack_require__(11).f;
+var defineProperty = __webpack_require__(10).f;
 module.exports = function (name) {
   var $Symbol = core.Symbol || (core.Symbol = LIBRARY ? {} : global.Symbol || {});
   if (name.charAt(0) != '_' && !(name in $Symbol)) defineProperty($Symbol, name, { value: wksExt.f(name) });
@@ -8994,7 +8994,7 @@ module.exports = function (it) {
 
 "use strict";
 
-var $defineProperty = __webpack_require__(11);
+var $defineProperty = __webpack_require__(10);
 var createDesc = __webpack_require__(42);
 
 module.exports = function (object, index, value) {
@@ -9380,7 +9380,7 @@ var toInteger = __webpack_require__(28);
 var toLength = __webpack_require__(8);
 var toIndex = __webpack_require__(184);
 var gOPN = __webpack_require__(47).f;
-var dP = __webpack_require__(11).f;
+var dP = __webpack_require__(10).f;
 var arrayFill = __webpack_require__(113);
 var setToStringTag = __webpack_require__(54);
 var ARRAY_BUFFER = 'ArrayBuffer';
@@ -13154,7 +13154,7 @@ module.exports = function (object, names) {
 /* 159 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var dP = __webpack_require__(11);
+var dP = __webpack_require__(10);
 var anObject = __webpack_require__(3);
 var getKeys = __webpack_require__(44);
 
@@ -13510,7 +13510,7 @@ __webpack_require__(1)({
 /***/ (function(module, exports, __webpack_require__) {
 
 // 21.2.5.3 get RegExp.prototype.flags()
-if (__webpack_require__(9) && /./g.flags != 'g') __webpack_require__(11).f(RegExp.prototype, 'flags', {
+if (__webpack_require__(9) && /./g.flags != 'g') __webpack_require__(10).f(RegExp.prototype, 'flags', {
   configurable: true,
   get: __webpack_require__(65)
 });
@@ -13579,7 +13579,7 @@ module.exports = __webpack_require__(79)(MAP, function (get) {
 
 "use strict";
 
-var dP = __webpack_require__(11).f;
+var dP = __webpack_require__(10).f;
 var create = __webpack_require__(46);
 var redefineAll = __webpack_require__(51);
 var ctx = __webpack_require__(26);
@@ -24094,7 +24094,7 @@ var _create = __webpack_require__(46);
 var gOPNExt = __webpack_require__(160);
 var $GOPD = __webpack_require__(21);
 var $GOPS = __webpack_require__(71);
-var $DP = __webpack_require__(11);
+var $DP = __webpack_require__(10);
 var $keys = __webpack_require__(44);
 var gOPD = $GOPD.f;
 var dP = $DP.f;
@@ -24358,7 +24358,7 @@ $export($export.S, 'Object', { create: __webpack_require__(46) });
 
 var $export = __webpack_require__(1);
 // 19.1.2.4 / 15.2.3.6 Object.defineProperty(O, P, Attributes)
-$export($export.S + $export.F * !__webpack_require__(9), 'Object', { defineProperty: __webpack_require__(11).f });
+$export($export.S + $export.F * !__webpack_require__(9), 'Object', { defineProperty: __webpack_require__(10).f });
 
 
 /***/ }),
@@ -24571,7 +24571,7 @@ $export($export.P, 'Function', { bind: __webpack_require__(163) });
 /* 243 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var dP = __webpack_require__(11).f;
+var dP = __webpack_require__(10).f;
 var FProto = Function.prototype;
 var nameRE = /^\s*function ([^ (]*)/;
 var NAME = 'name';
@@ -24600,7 +24600,7 @@ var getPrototypeOf = __webpack_require__(22);
 var HAS_INSTANCE = __webpack_require__(7)('hasInstance');
 var FunctionProto = Function.prototype;
 // 19.2.3.6 Function.prototype[@@hasInstance](V)
-if (!(HAS_INSTANCE in FunctionProto)) __webpack_require__(11).f(FunctionProto, HAS_INSTANCE, { value: function (O) {
+if (!(HAS_INSTANCE in FunctionProto)) __webpack_require__(10).f(FunctionProto, HAS_INSTANCE, { value: function (O) {
   if (typeof this != 'function' || !isObject(O)) return false;
   if (!isObject(this.prototype)) return O instanceof this;
   // for environment w/o native `@@hasInstance` logic enough `instanceof`, but add this:
@@ -24643,7 +24643,7 @@ var toPrimitive = __webpack_require__(31);
 var fails = __webpack_require__(5);
 var gOPN = __webpack_require__(47).f;
 var gOPD = __webpack_require__(21).f;
-var dP = __webpack_require__(11).f;
+var dP = __webpack_require__(10).f;
 var $trim = __webpack_require__(56).trim;
 var NUMBER = 'Number';
 var $Number = global[NUMBER];
@@ -26165,7 +26165,7 @@ __webpack_require__(48)('Array');
 
 var global = __webpack_require__(4);
 var inheritIfRequired = __webpack_require__(101);
-var dP = __webpack_require__(11).f;
+var dP = __webpack_require__(10).f;
 var gOPN = __webpack_require__(47).f;
 var isRegExp = __webpack_require__(74);
 var $flags = __webpack_require__(65);
@@ -27147,7 +27147,7 @@ $export($export.S + $export.F * (NEW_TARGET_BUG || ARGS_BUG), 'Reflect', {
 /***/ (function(module, exports, __webpack_require__) {
 
 // 26.1.3 Reflect.defineProperty(target, propertyKey, attributes)
-var dP = __webpack_require__(11);
+var dP = __webpack_require__(10);
 var $export = __webpack_require__(1);
 var anObject = __webpack_require__(3);
 var toPrimitive = __webpack_require__(31);
@@ -27348,7 +27348,7 @@ $export($export.S, 'Reflect', {
 /***/ (function(module, exports, __webpack_require__) {
 
 // 26.1.13 Reflect.set(target, propertyKey, V [, receiver])
-var dP = __webpack_require__(11);
+var dP = __webpack_require__(10);
 var gOPD = __webpack_require__(21);
 var getPrototypeOf = __webpack_require__(22);
 var has = __webpack_require__(19);
@@ -27689,7 +27689,7 @@ $export($export.S, 'Object', {
 var $export = __webpack_require__(1);
 var toObject = __webpack_require__(12);
 var aFunction = __webpack_require__(15);
-var $defineProperty = __webpack_require__(11);
+var $defineProperty = __webpack_require__(10);
 
 // B.2.2.2 Object.prototype.__defineGetter__(P, getter)
 __webpack_require__(9) && $export($export.P + __webpack_require__(81), 'Object', {
@@ -27708,7 +27708,7 @@ __webpack_require__(9) && $export($export.P + __webpack_require__(81), 'Object',
 var $export = __webpack_require__(1);
 var toObject = __webpack_require__(12);
 var aFunction = __webpack_require__(15);
-var $defineProperty = __webpack_require__(11);
+var $defineProperty = __webpack_require__(10);
 
 // B.2.2.3 Object.prototype.__defineSetter__(P, setter)
 __webpack_require__(9) && $export($export.P + __webpack_require__(81), 'Object', {
@@ -39340,7 +39340,7 @@ var Downloader_Downloader = /*#__PURE__*/function () {
 }();
 /* harmony default export */ var web_Downloader = (Downloader_Downloader);
 // EXTERNAL MODULE: ./package.json
-var package_0 = __webpack_require__(10);
+var package_0 = __webpack_require__(11);
 
 // CONCATENATED MODULE: ./src/client/utils/ajax.js
 function createHTTPQuery(params) {
@@ -43079,26 +43079,6 @@ var About_About = /*#__PURE__*/function (_React$Component) {
       Observer.emit(GLOBAL_EVENT.HIDE_ABOUT);
     }
   }, {
-    key: "renderDownload",
-    value: function renderDownload() {
-      return /*#__PURE__*/react_default.a.createElement("tr", null, /*#__PURE__*/react_default.a.createElement("td", null, /*#__PURE__*/react_default.a.createElement("b", null, utils_I18.f("ABOUT_APPS"))), /*#__PURE__*/react_default.a.createElement("td", null, /*#__PURE__*/react_default.a.createElement("a", {
-        href: package_0.download,
-        target: "_blank",
-        className: "color-800",
-        rel: "noopener"
-      }, package_0.download)));
-    }
-  }, {
-    key: "renderWebVersion",
-    value: function renderWebVersion() {
-      return /*#__PURE__*/react_default.a.createElement("tr", null, /*#__PURE__*/react_default.a.createElement("td", null, /*#__PURE__*/react_default.a.createElement("b", null, utils_I18.f("ABOUT_WEB"))), /*#__PURE__*/react_default.a.createElement("td", null, /*#__PURE__*/react_default.a.createElement("a", {
-        href: package_0.webApp,
-        target: "_blank",
-        className: "color-800",
-        rel: "noopener"
-      }, package_0.webApp)));
-    }
-  }, {
     key: "render",
     value: function render() {
       return /*#__PURE__*/react_default.a.createElement("div", {
@@ -43128,7 +43108,12 @@ var About_About = /*#__PURE__*/function (_React$Component) {
         target: "_blank",
         className: "color-800",
         rel: "noopener"
-      }, package_0.bugs.url))),  true ? this.renderDownload() : undefined, /*#__PURE__*/react_default.a.createElement("tr", null, /*#__PURE__*/react_default.a.createElement("td", null, /*#__PURE__*/react_default.a.createElement("b", null, utils_I18.f("ABOUT_LIBS"))), /*#__PURE__*/react_default.a.createElement("td", null, /*#__PURE__*/react_default.a.createElement("div", null, /*#__PURE__*/react_default.a.createElement("a", {
+      }, package_0.bugs.url))), /*#__PURE__*/react_default.a.createElement("tr", null, /*#__PURE__*/react_default.a.createElement("td", null, /*#__PURE__*/react_default.a.createElement("b", null, utils_I18.f("ABOUT_APPS"))), /*#__PURE__*/react_default.a.createElement("td", null, /*#__PURE__*/react_default.a.createElement("a", {
+        href: package_0.download,
+        target: "_blank",
+        className: "color-800",
+        rel: "noopener"
+      }, package_0.download))), /*#__PURE__*/react_default.a.createElement("tr", null, /*#__PURE__*/react_default.a.createElement("td", null, /*#__PURE__*/react_default.a.createElement("b", null, utils_I18.f("ABOUT_LIBS"))), /*#__PURE__*/react_default.a.createElement("td", null, /*#__PURE__*/react_default.a.createElement("div", null, /*#__PURE__*/react_default.a.createElement("a", {
         href: "https://facebook.github.io/react",
         target: "_blank",
         className: "color-800",
@@ -44037,10 +44022,8 @@ var ImagesList_ImagesList = /*#__PURE__*/function (_React$Component) {
     value: function loadImagesComplete() {
       var data = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
       Observer.emit(GLOBAL_EVENT.HIDE_SHADER);
-      if (true) {
-        react_dom_default.a.findDOMNode(this.refs.addImagesInput).value = "";
-        react_dom_default.a.findDOMNode(this.refs.addZipInput).value = "";
-      }
+      react_dom_default.a.findDOMNode(this.refs.addImagesInput).value = "";
+      react_dom_default.a.findDOMNode(this.refs.addZipInput).value = "";
       var names = Object.keys(data);
       if (names.length) {
         var images = this.state.images;
@@ -44351,9 +44334,18 @@ var ImagesList_ImagesList = /*#__PURE__*/function (_React$Component) {
       }
     }
   }, {
-    key: "renderWebButtons",
-    value: function renderWebButtons() {
-      return /*#__PURE__*/react_default.a.createElement("span", null, /*#__PURE__*/react_default.a.createElement("div", {
+    key: "render",
+    value: function render() {
+      var data = this.getImagesTree(this.state.images);
+      var dropHelp = Object.keys(this.state.images).length > 0 ? null : /*#__PURE__*/react_default.a.createElement("div", {
+        ref: "dropHelp",
+        className: "image-drop-help"
+      }, utils_I18.f("IMAGE_DROP_HELP"));
+      return /*#__PURE__*/react_default.a.createElement("div", {
+        className: "images-list border-color-gray back-white"
+      }, /*#__PURE__*/react_default.a.createElement("div", {
+        className: "images-controllers border-color-gray"
+      }, /*#__PURE__*/react_default.a.createElement("span", null, /*#__PURE__*/react_default.a.createElement("div", {
         className: "btn back-800 border-color-gray color-white file-upload",
         title: utils_I18.f("ADD_IMAGES_TITLE")
       }, utils_I18.f("ADD_IMAGES"), /*#__PURE__*/react_default.a.createElement("input", {
@@ -44370,34 +44362,7 @@ var ImagesList_ImagesList = /*#__PURE__*/function (_React$Component) {
         ref: "addZipInput",
         accept: ".zip,application/octet-stream,application/zip,application/x-zip,application/x-zip-compressed",
         onChange: this.addZip
-      })));
-    }
-  }, {
-    key: "renderElectronButtons",
-    value: function renderElectronButtons() {
-      return /*#__PURE__*/react_default.a.createElement("span", null, /*#__PURE__*/react_default.a.createElement("div", {
-        className: "btn back-800 border-color-gray color-white",
-        onClick: this.addImagesFs,
-        title: utils_I18.f("ADD_IMAGES_TITLE")
-      }, utils_I18.f("ADD_IMAGES")), /*#__PURE__*/react_default.a.createElement("div", {
-        className: "btn back-800 border-color-gray color-white",
-        onClick: this.addFolderFs,
-        title: utils_I18.f("ADD_FOLDER_TITLE")
-      }, utils_I18.f("ADD_FOLDER")));
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      var data = this.getImagesTree(this.state.images);
-      var dropHelp = Object.keys(this.state.images).length > 0 ? null : /*#__PURE__*/react_default.a.createElement("div", {
-        ref: "dropHelp",
-        className: "image-drop-help"
-      }, utils_I18.f("IMAGE_DROP_HELP"));
-      return /*#__PURE__*/react_default.a.createElement("div", {
-        className: "images-list border-color-gray back-white"
-      }, /*#__PURE__*/react_default.a.createElement("div", {
-        className: "images-controllers border-color-gray"
-      },  true ? this.renderWebButtons() : undefined, /*#__PURE__*/react_default.a.createElement("div", {
+      }))), /*#__PURE__*/react_default.a.createElement("div", {
         className: "btn back-800 border-color-gray color-white",
         onClick: this.deleteSelectedImages,
         title: utils_I18.f("DELETE_TITLE")
@@ -44781,10 +44746,7 @@ var PackProperties_PackProperties = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "saveOptions",
     value: function saveOptions() {
-      var force = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
-      if (true) {
-        utils_Storage.save(STORAGE_OPTIONS_KEY, this.packOptions);
-      }
+      utils_Storage.save(STORAGE_OPTIONS_KEY, this.packOptions);
     }
   }, {
     key: "componentDidMount",
@@ -45042,31 +45004,14 @@ var PackProperties_PackProperties = /*#__PURE__*/function (_React$Component) {
         ref: "editCustomFormat",
         onClick: this.editCustomExporter
       }))), /*#__PURE__*/react_default.a.createElement("tr", {
-        title: utils_I18.f("FILE_NAME_TITLE"),
-        style: {
-          display:  true ? "" : undefined
-        }
+        title: utils_I18.f("FILE_NAME_TITLE")
       }, /*#__PURE__*/react_default.a.createElement("td", null, utils_I18.f("FILE_NAME")), /*#__PURE__*/react_default.a.createElement("td", null, /*#__PURE__*/react_default.a.createElement("input", {
         ref: "fileName",
         className: "border-color-gray",
         type: "text",
         defaultValue: this.packOptions.fileName,
         onBlur: this.onExporterPropChanged
-      })), /*#__PURE__*/react_default.a.createElement("td", null)), /*#__PURE__*/react_default.a.createElement("tr", {
-        title: utils_I18.f("SAVE_PATH_TITLE"),
-        style: {
-          display:  false ? undefined : "none"
-        }
-      }, /*#__PURE__*/react_default.a.createElement("td", null, utils_I18.f("SAVE_PATH")), /*#__PURE__*/react_default.a.createElement("td", null, /*#__PURE__*/react_default.a.createElement("input", {
-        ref: "savePath",
-        className: "border-color-gray",
-        type: "text",
-        defaultValue: this.packOptions.savePath,
-        onBlur: this.onExporterPropChanged
-      })), /*#__PURE__*/react_default.a.createElement("td", null, /*#__PURE__*/react_default.a.createElement("div", {
-        className: "folder-btn back-800",
-        onClick: this.selectSavePath
-      }))), /*#__PURE__*/react_default.a.createElement("tr", null, /*#__PURE__*/react_default.a.createElement("td", {
+      })), /*#__PURE__*/react_default.a.createElement("td", null)), /*#__PURE__*/react_default.a.createElement("tr", null, /*#__PURE__*/react_default.a.createElement("td", {
         colSpan: "3",
         className: "center-align"
       }, /*#__PURE__*/react_default.a.createElement("div", {
@@ -47872,7 +47817,6 @@ var layout = null;
 var STORAGE_LANGUAGE_KEY = "language";
 function client_run() {
   web_Controller.init();
-  if (false) {}
   loadLocalization();
 }
 function loadLocalization() {

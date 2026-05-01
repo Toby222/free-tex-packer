@@ -13,46 +13,6 @@ class About extends React.Component {
 		Observer.emit(GLOBAL_EVENT.HIDE_ABOUT);
 	}
 
-	renderDownload() {
-		return (
-			<tr>
-				<td>
-					<b>{I18.f("ABOUT_APPS")}</b>
-				</td>
-				<td>
-					<a
-						href={appInfo.download}
-						target="_blank"
-						className="color-800"
-						rel="noopener"
-					>
-						{appInfo.download}
-					</a>
-				</td>
-			</tr>
-		);
-	}
-
-	renderWebVersion() {
-		return (
-			<tr>
-				<td>
-					<b>{I18.f("ABOUT_WEB")}</b>
-				</td>
-				<td>
-					<a
-						href={appInfo.webApp}
-						target="_blank"
-						className="color-800"
-						rel="noopener"
-					>
-						{appInfo.webApp}
-					</a>
-				</td>
-			</tr>
-		);
-	}
-
 	render() {
 		return (
 			<div className="about-shader">
@@ -115,9 +75,21 @@ class About extends React.Component {
 									</td>
 								</tr>
 
-								{PLATFORM === "web"
-									? this.renderDownload()
-									: this.renderWebVersion()}
+								<tr>
+									<td>
+										<b>{I18.f("ABOUT_APPS")}</b>
+									</td>
+									<td>
+										<a
+											href={appInfo.download}
+											target="_blank"
+											className="color-800"
+											rel="noopener"
+										>
+											{appInfo.download}
+										</a>
+									</td>
+								</tr>
 
 								<tr>
 									<td>

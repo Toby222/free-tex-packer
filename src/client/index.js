@@ -15,9 +15,6 @@ const STORAGE_LANGUAGE_KEY = "language";
 
 function run() {
 	Controller.init();
-	if (PLATFORM === "electron") {
-		injectCss("static/css/index-electron.css");
-	}
 	loadLocalization();
 }
 

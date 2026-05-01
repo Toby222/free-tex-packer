@@ -47,17 +47,20 @@
     {
       "name": "Davide Matta aka DadeKuma",
       "homepage": "https://github.com/DadeKuma"
+    },
+    {
+      "name": "Tobias Berger",
+      "url": "https://tobot.dev",
+      "email": "toby@tobot.dev"
     }
   ],
   "scripts": {
     "start": "webpack-dev-server --host 127.0.0.1 --port 4000",
-    "start-electron": "webpack-dev-server --host 127.0.0.1 --port 4000 --platform electron",
-    "build-web": "webpack --build --platform web",
-    "build-electron": "webpack --build --platform electron"
+    "build": "webpack --build"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/odrick/free-tex-packer.git"
+    "url": "git+https://github.com/Toby222/free-tex-packer.git"
   },
   "keywords": [
     "texture",
@@ -70,14 +73,14 @@
     "sprite",
     "2d"
   ],
-  "author": "Alexander Norinchak",
-  "authorSite": "https://github.com/odrick/",
-  "authorEmail": "norinchak@gmail.com",
+  "author": "Tobias Berger",
+  "authorSite": "https://github.com/Toby222/",
+  "authorEmail": "toby@tobot.dev",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/odrick/free-tex-packer/issues"
+    "url": "https://github.com/Toby222/free-tex-packer/issues"
   },
-  "homepage": "https://github.com/odrick/free-tex-packer",
+  "homepage": "https://github.com/Toby222/free-tex-packer",
   "devDependencies": {
     "@babel/core": "^7.6.4",
     "@babel/preset-env": "^7.6.3",
@@ -91,7 +94,6 @@
     "babel-runtime": "^6.23.0",
     "chokidar": "^2.0.4",
     "copy-webpack-plugin": "^4.6.0",
-    "electron": "^4.0.4",
     "eventemitter3": "^3.0.1",
     "file-saver": "^2.0.0",
     "glob": "^7.1.1",
