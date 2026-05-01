@@ -152,7 +152,7 @@ class PackResults extends React.Component {
 							}
 						>
 							<SpritesPlayer
-								ref="spritesPlayer"
+								ref={(spritesPlayer) => (this.spritesPlayer = spritesPlayer)}
 								data={this.state.packResult}
 								start={this.state.playerVisible}
 								textureBack={this.state.textureBack}

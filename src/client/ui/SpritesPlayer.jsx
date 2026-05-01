@@ -48,7 +48,7 @@ class SpritesPlayer extends React.Component {
 	}
 
 	setup() {
-		ReactDOM.findDOMNode(this.refs.playerContainer).className =
+		this.playerContainer.className =
 			"player-view-container " + this.props.textureBack;
 
 		this.textures = [];
@@ -76,7 +76,7 @@ class SpritesPlayer extends React.Component {
 		if (this.width < 256) this.width = 256;
 		if (this.height < 200) this.height = 200;
 
-		const canvas = ReactDOM.findDOMNode(this.refs.view);
+		const canvas = this.view;
 		canvas.width = this.width;
 		canvas.height = this.height;
 
@@ -131,21 +131,18 @@ class SpritesPlayer extends React.Component {
 		}
 		this.renderTexture();
 
-		this.updateTimer = setTimeout(
-			this.update,
-			1000 / ReactDOM.findDOMNode(this.refs.speed).value,
-		);
+		this.updateTimer = setTimeout(this.update, 1000 / this.speed.value);
 	}
 
 	renderTexture() {
-		const ctx = ReactDOM.findDOMNode(this.refs.view).getContext("2d");
+		const ctx = this.view.getContext("2d");
 
 		ctx.clearRect(0, 0, this.width, this.height);
 
 		const texture = this.currentTextures[this.currentFrame];
 		if (!texture) return;
 
-		const buffer = ReactDOM.findDOMNode(this.refs.buffer);
+		const buffer = this.buffer;
 		buffer.width = texture.config.sourceSize.w;
 		buffer.height = texture.config.sourceSize.h;
 
@@ -217,11 +214,19 @@ class SpritesPlayer extends React.Component {
 
 	render() {
 		return (
-			<div ref="container" className="player-container">
+			<div
+				ref={(container) => (this.container = container)}
+				className="player-container"
+			>
 				<div className="player-window border-color-gray">
-					<div ref="playerContainer">
-						<canvas ref="view"> </canvas>
-						<canvas ref="buffer" className="player-buffer">
+					<div
+						ref={(playerContainer) => (this.playerContainer = playerContainer)}
+					>
+						<canvas ref={(view) => (this.view = view)}> </canvas>
+						<canvas
+							ref={(buffer) => (this.buffer = buffer)}
+							className="player-buffer"
+						>
 							{" "}
 						</canvas>
 					</div>
@@ -233,7 +238,7 @@ class SpritesPlayer extends React.Component {
 									<td>
 										<input
 											type="range"
-											ref="speed"
+											ref={(speed) => (this.speed = speed)}
 											max="60"
 											min="1"
 											defaultValue="10"
@@ -241,7 +246,7 @@ class SpritesPlayer extends React.Component {
 										/>
 									</td>
 									<td>
-										<div ref="fps" className="player-fps">
+										<div ref={(fps) => (this.fps = fps)} className="player-fps">
 											10 fps
 										</div>
 									</td>

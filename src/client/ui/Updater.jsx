@@ -85,7 +85,9 @@ class Updater extends React.Component {
 					{this.state.installation ? (
 						<div className="updater-download">
 							<div
-								ref="downloadProgress"
+								ref={(downloadProgress) =>
+									(this.downloadProgress = downloadProgress)
+								}
 								className="updater-download-progress"
 								style={{ width: this.state.downloadProgress + "%" }}
 							></div>

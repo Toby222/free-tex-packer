@@ -1,7 +1,7 @@
 const path = require("path");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 
-const prodBuild = process.argv.includes("build")
+const prodBuild = process.argv.includes("build");
 
 const entry = ["babel-polyfill", "./src/client/index"];
 
@@ -14,14 +14,14 @@ const devtool = prodBuild ? "source-map" : "eval-source-map";
 if (prodBuild) {
 	plugins.push(
 		new CopyWebpackPlugin({
-			patterns: [{ from: "src/client/resources", to: "web/" }]
+			patterns: [{ from: "src/client/resources", to: "web/" }],
 		}),
 	);
 } else {
 	entry.push("webpack-dev-server/client?http://localhost:4000");
 	plugins.push(
 		new CopyWebpackPlugin({
-			patterns: [{ from: "src/client/resources", to: "./" }]
+			patterns: [{ from: "src/client/resources", to: "./" }],
 		}),
 	);
 }

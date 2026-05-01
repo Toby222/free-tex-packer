@@ -11,7 +11,7 @@ class ProcessingShader extends React.Component {
 	}
 
 	componentDidMount() {
-		const shader = ReactDOM.findDOMNode(this.refs.shader);
+		const shader = this.shader;
 		if (shader) {
 			shader.style.visibility = "hidden";
 
@@ -27,7 +27,10 @@ class ProcessingShader extends React.Component {
 
 	render() {
 		return (
-			<div ref="shader" className="processing-shader color-white">
+			<div
+				ref={(shader) => (this.shader = shader)}
+				className="processing-shader color-white"
+			>
 				<div className="processing-content">{I18.f("PLEASE_WAIT")}</div>
 			</div>
 		);

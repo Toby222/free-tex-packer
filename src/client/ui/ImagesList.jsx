@@ -75,18 +75,18 @@ class ImagesList extends React.Component {
 	}
 
 	componentDidMount() {
-		const dropZone = ReactDOM.findDOMNode(this.refs.imagesTree);
+		const dropZone = this.imagesTree;
 		if (dropZone) {
 			dropZone.ondrop = this.onFilesDrop;
 
 			dropZone.ondragover = () => {
-				const help = ReactDOM.findDOMNode(this.refs.dropHelp);
+				const help = this.dropHelp;
 				if (help) help.className = "image-drop-help selected";
 				return false;
 			};
 
 			dropZone.ondragleave = () => {
-				const help = ReactDOM.findDOMNode(this.refs.dropHelp);
+				const help = this.dropHelp;
 				if (help) help.className = "image-drop-help";
 				return false;
 			};
@@ -196,8 +196,8 @@ class ImagesList extends React.Component {
 	loadImagesComplete(data = []) {
 		Observer.emit(GLOBAL_EVENT.HIDE_SHADER);
 
-		ReactDOM.findDOMNode(this.refs.addImagesInput).value = "";
-		ReactDOM.findDOMNode(this.refs.addZipInput).value = "";
+		this.addImagesInput.value = "";
+		this.addZipInput.value = "";
 
 		const names = Object.keys(data);
 
@@ -501,7 +501,10 @@ class ImagesList extends React.Component {
 
 		const dropHelp =
 			Object.keys(this.state.images).length > 0 ? null : (
-				<div ref="dropHelp" className="image-drop-help">
+				<div
+					ref={(dropHelp) => (this.dropHelp = dropHelp)}
+					className="image-drop-help"
+				>
 					{I18.f("IMAGE_DROP_HELP")}
 				</div>
 			);
@@ -517,7 +520,7 @@ class ImagesList extends React.Component {
 							{I18.f("ADD_IMAGES")}
 							<input
 								type="file"
-								ref="addImagesInput"
+								ref={(addImagesInput) => (this.addImagesInput = addImagesInput)}
 								multiple
 								accept="image/png,image/jpg,image/jpeg,image/gif"
 								onChange={this.addImages}
@@ -531,7 +534,7 @@ class ImagesList extends React.Component {
 							{I18.f("ADD_ZIP")}
 							<input
 								type="file"
-								ref="addZipInput"
+								ref={(addZipInput) => (this.addZipInput = addZipInput)}
 								accept=".zip,application/octet-stream,application/zip,application/x-zip,application/x-zip-compressed"
 								onChange={this.addZip}
 							/>
@@ -556,7 +559,10 @@ class ImagesList extends React.Component {
 					<hr />
 				</div>
 
-				<div ref="imagesTree" className="images-tree">
+				<div
+					ref={(imagesTree) => (this.imagesTree = imagesTree)}
+					className="images-tree"
+				>
 					<ImagesTree data={data} />
 					{dropHelp}
 				</div>

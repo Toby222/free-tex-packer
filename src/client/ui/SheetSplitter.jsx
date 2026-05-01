@@ -100,7 +100,7 @@ class SheetSplitter extends React.Component {
 		const ctx = this.buffer.getContext("2d");
 		const files = [];
 
-		const holdTrim = ReactDOM.findDOMNode(this.refs.holdtrim).checked;
+		const holdTrim = this.holdtrim.checked;
 
 		for (const item of this.frames) {
 			const trimmed = item.trimmed ? holdTrim : false;
@@ -194,8 +194,7 @@ class SheetSplitter extends React.Component {
 				this.textureName = keys[0];
 
 				this.texture = data[this.textureName];
-				ReactDOM.findDOMNode(this.refs.textureName).innerHTML =
-					this.textureName;
+				this.textureName.innerHTML = this.textureName;
 
 				this.updateView();
 
@@ -205,7 +204,7 @@ class SheetSplitter extends React.Component {
 	}
 
 	updateTexture() {
-		const canvas = ReactDOM.findDOMNode(this.refs.view);
+		const canvas = this.view;
 
 		if (this.texture) {
 			canvas.width = this.texture.width;
@@ -237,7 +236,7 @@ class SheetSplitter extends React.Component {
 				this.data = content;
 
 				this.dataName = item.name;
-				ReactDOM.findDOMNode(this.refs.dataFileName).innerHTML = this.dataName;
+				this.dataFileName.innerHTML = this.dataName;
 
 				getSplitterByData(this.data, (splitter) => {
 					this.setState({ splitter: splitter });
@@ -257,15 +256,15 @@ class SheetSplitter extends React.Component {
 			{
 				textureWidth: this.texture.width,
 				textureHeight: this.texture.height,
-				width: ReactDOM.findDOMNode(this.refs.width).value * 1 || 32,
-				height: ReactDOM.findDOMNode(this.refs.height).value * 1 || 32,
-				padding: ReactDOM.findDOMNode(this.refs.padding).value * 1 || 0,
+				width: this.width.value * 1 || 32,
+				height: this.height.value * 1 || 32,
+				padding: this.padding.value * 1 || 0,
 			},
 			(frames) => {
 				if (frames) {
 					this.frames = frames;
 
-					const canvas = ReactDOM.findDOMNode(this.refs.view);
+					const canvas = this.view;
 					const ctx = canvas.getContext("2d");
 
 					for (const item of this.frames) {
@@ -314,7 +313,7 @@ class SheetSplitter extends React.Component {
 			if (this.textureBackColors.indexOf(name) >= 0) {
 				this.setState({ textureBack: name });
 
-				const canvas = ReactDOM.findDOMNode(this.refs.view);
+				const canvas = this.view;
 				canvas.className = name;
 
 				return;
@@ -327,7 +326,7 @@ class SheetSplitter extends React.Component {
 			const w = Math.floor(this.texture.width * val);
 			const h = Math.floor(this.texture.height * val);
 
-			const canvas = ReactDOM.findDOMNode(this.refs.view);
+			const canvas = this.view;
 			canvas.style.width = w + "px";
 			canvas.style.height = h + "px";
 		}
@@ -367,7 +366,6 @@ class SheetSplitter extends React.Component {
 											{I18.f("SELECT_TEXTURE")}
 											<input
 												type="file"
-												ref="selectTextureInput"
 												accept="image/png,image/jpg,image/jpeg,image/gif"
 												onChange={this.selectTexture}
 											/>
@@ -384,11 +382,7 @@ class SheetSplitter extends React.Component {
 									<td>
 										<div className="btn back-800 border-color-gray color-white file-upload">
 											{I18.f("SELECT_DATA_FILE")}
-											<input
-												type="file"
-												ref="selectTextureInput"
-												onChange={this.selectDataFile}
-											/>
+											<input type="file" onChange={this.selectDataFile} />
 										</div>
 									</td>
 									<td>

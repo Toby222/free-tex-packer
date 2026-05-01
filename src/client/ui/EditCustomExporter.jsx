@@ -23,10 +23,10 @@ class EditCustomExporter extends React.Component {
 	save() {
 		const exporter = getExporterByType("custom");
 
-		const content = ReactDOM.findDOMNode(this.refs.content).value;
-		const allowTrim = ReactDOM.findDOMNode(this.refs.allowTrim).checked;
-		const allowRotation = ReactDOM.findDOMNode(this.refs.allowRotation).checked;
-		const fileExt = ReactDOM.findDOMNode(this.refs.fileExt).value;
+		const content = this.content.value;
+		const allowTrim = this.allowTrim.checked;
+		const allowRotation = this.allowRotation.checked;
+		const fileExt = this.fileExt.value;
 
 		try {
 			mustache.parse(content);
@@ -66,7 +66,7 @@ class EditCustomExporter extends React.Component {
 
 					<div>
 						<textarea
-							ref="content"
+							ref={(content) => (this.content = content)}
 							className="edit-custom-exporter-data"
 							defaultValue={exporter.content}
 						></textarea>
@@ -75,7 +75,7 @@ class EditCustomExporter extends React.Component {
 					<div>
 						<b>{I18.f("ALLOW_TRIM")}</b>
 						<input
-							ref="allowTrim"
+							ref={(allowTrim) => (this.allowTrim = allowTrim)}
 							className="border-color-gray"
 							type="checkbox"
 							defaultChecked={exporter.allowTrim ? "checked" : ""}
@@ -83,7 +83,7 @@ class EditCustomExporter extends React.Component {
 
 						<b>{I18.f("ALLOW_ROTATION")}</b>
 						<input
-							ref="allowRotation"
+							ref={(allowRotation) => (this.allowRotation = allowRotation)}
 							className="border-color-gray"
 							type="checkbox"
 							defaultChecked={exporter.allowRotation ? "checked" : ""}
@@ -91,7 +91,7 @@ class EditCustomExporter extends React.Component {
 
 						<b>{I18.f("FILE_EXT")}</b>
 						<input
-							ref="fileExt"
+							ref={(fileExt) => (this.fileExt = fileExt)}
 							className="border-color-gray"
 							type="text"
 							defaultValue={exporter.fileExt}

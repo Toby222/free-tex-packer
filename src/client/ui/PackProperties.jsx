@@ -120,86 +120,67 @@ class PackProperties extends React.Component {
 	updatePackOptions() {
 		const data = {};
 
-		data.textureName = ReactDOM.findDOMNode(this.refs.textureName).value;
-		data.textureFormat = ReactDOM.findDOMNode(this.refs.textureFormat).value;
+		data.textureName = this.textureName.value;
+		data.textureFormat = this.textureFormat.value;
 		data.removeFileExtension = ReactDOM.findDOMNode(
 			this.refs.removeFileExtension,
 		).checked;
 		data.prependFolderName = ReactDOM.findDOMNode(
 			this.refs.prependFolderName,
 		).checked;
-		data.base64Export = ReactDOM.findDOMNode(this.refs.base64Export).checked;
-		data.tinify = ReactDOM.findDOMNode(this.refs.tinify).checked;
-		data.tinifyKey = ReactDOM.findDOMNode(this.refs.tinifyKey).value;
-		data.scale = Number(ReactDOM.findDOMNode(this.refs.scale).value);
-		data.filter = ReactDOM.findDOMNode(this.refs.filter).value;
-		data.exporter = ReactDOM.findDOMNode(this.refs.exporter).value;
-		data.fileName = ReactDOM.findDOMNode(this.refs.fileName).value;
-		data.savePath = ReactDOM.findDOMNode(this.refs.savePath).value;
-		data.width = Number(ReactDOM.findDOMNode(this.refs.width).value) || 0;
-		data.height = Number(ReactDOM.findDOMNode(this.refs.height).value) || 0;
-		data.fixedSize = ReactDOM.findDOMNode(this.refs.fixedSize).checked;
-		data.powerOfTwo = ReactDOM.findDOMNode(this.refs.powerOfTwo).checked;
-		data.padding = Number(ReactDOM.findDOMNode(this.refs.padding).value) || 0;
-		data.extrude = Number(ReactDOM.findDOMNode(this.refs.extrude).value) || 0;
-		data.allowRotation = ReactDOM.findDOMNode(this.refs.allowRotation).checked;
-		data.allowTrim = ReactDOM.findDOMNode(this.refs.allowTrim).checked;
-		data.trimMode = ReactDOM.findDOMNode(this.refs.trimMode).value;
-		data.alphaThreshold = ReactDOM.findDOMNode(this.refs.alphaThreshold).value;
+		data.base64Export = this.base64Export.checked;
+		data.tinify = this.tinify.checked;
+		data.tinifyKey = this.tinifyKey.value;
+		data.scale = Number(this.scale.value);
+		data.filter = this.filter.value;
+		data.exporter = this.exporter.value;
+		data.fileName = this.fileName.value;
+		data.savePath = this.savePath.value;
+		data.width = Number(this.width.value) || 0;
+		data.height = Number(this.height.value) || 0;
+		data.fixedSize = this.fixedSize.checked;
+		data.powerOfTwo = this.powerOfTwo.checked;
+		data.padding = Number(this.padding.value) || 0;
+		data.extrude = Number(this.extrude.value) || 0;
+		data.allowRotation = this.allowRotation.checked;
+		data.allowTrim = this.allowTrim.checked;
+		data.trimMode = this.trimMode.value;
+		data.alphaThreshold = this.alphaThreshold.value;
 		data.detectIdentical = ReactDOM.findDOMNode(
 			this.refs.detectIdentical,
 		).checked;
-		data.packer = ReactDOM.findDOMNode(this.refs.packer).value;
-		data.packerMethod = ReactDOM.findDOMNode(this.refs.packerMethod).value;
+		data.packer = this.packer.value;
+		data.packerMethod = this.packerMethod.value;
 
 		this.packOptions = this.applyOptionsDefaults(data);
 	}
 
 	refreshPackOptions() {
-		ReactDOM.findDOMNode(this.refs.textureName).value =
-			this.packOptions.textureName;
-		ReactDOM.findDOMNode(this.refs.textureFormat).value =
-			this.packOptions.textureFormat;
-		ReactDOM.findDOMNode(this.refs.removeFileExtension).checked =
-			this.packOptions.removeFileExtension;
-		ReactDOM.findDOMNode(this.refs.prependFolderName).checked =
-			this.packOptions.prependFolderName;
-		ReactDOM.findDOMNode(this.refs.base64Export).checked =
-			this.packOptions.base64Export;
-		ReactDOM.findDOMNode(this.refs.tinify).checked = this.packOptions.tinify;
-		ReactDOM.findDOMNode(this.refs.tinifyKey).value =
-			this.packOptions.tinifyKey;
-		ReactDOM.findDOMNode(this.refs.scale).value = Number(
-			this.packOptions.scale,
-		);
-		ReactDOM.findDOMNode(this.refs.filter).value = this.packOptions.filter;
-		ReactDOM.findDOMNode(this.refs.exporter).value = this.packOptions.exporter;
-		ReactDOM.findDOMNode(this.refs.fileName).value = this.packOptions.fileName;
-		ReactDOM.findDOMNode(this.refs.savePath).value = this.packOptions.savePath;
-		ReactDOM.findDOMNode(this.refs.width).value =
-			Number(this.packOptions.width) || 0;
-		ReactDOM.findDOMNode(this.refs.height).value =
-			Number(this.packOptions.height) || 0;
-		ReactDOM.findDOMNode(this.refs.fixedSize).checked =
-			this.packOptions.fixedSize;
-		ReactDOM.findDOMNode(this.refs.powerOfTwo).checked =
-			this.packOptions.powerOfTwo;
-		ReactDOM.findDOMNode(this.refs.padding).value =
-			Number(this.packOptions.padding) || 0;
-		ReactDOM.findDOMNode(this.refs.extrude).value =
-			Number(this.packOptions.extrude) || 0;
-		ReactDOM.findDOMNode(this.refs.allowRotation).checked =
-			this.packOptions.allowRotation;
-		ReactDOM.findDOMNode(this.refs.allowTrim).checked =
-			this.packOptions.allowTrim;
-		ReactDOM.findDOMNode(this.refs.trimMode).value = this.packOptions.trimMode;
-		ReactDOM.findDOMNode(this.refs.alphaThreshold).value =
-			this.packOptions.alphaThreshold || 0;
-		ReactDOM.findDOMNode(this.refs.detectIdentical).checked =
-			this.packOptions.detectIdentical;
-		ReactDOM.findDOMNode(this.refs.packer).value = this.packOptions.packer;
-		ReactDOM.findDOMNode(this.refs.packerMethod).value =
-			this.packOptions.packerMethod;
+		this.textureName.value = this.packOptions.textureName;
+		this.textureFormat.value = this.packOptions.textureFormat;
+		this.removeFileExtension.checked = this.packOptions.removeFileExtension;
+		this.prependFolderName.checked = this.packOptions.prependFolderName;
+		this.base64Export.checked = this.packOptions.base64Export;
+		this.tinify.checked = this.packOptions.tinify;
+		this.tinifyKey.value = this.packOptions.tinifyKey;
+		this.scale.value = Number(this.packOptions.scale);
+		this.filter.value = this.packOptions.filter;
+		this.exporter.value = this.packOptions.exporter;
+		this.fileName.value = this.packOptions.fileName;
+		this.savePath.value = this.packOptions.savePath;
+		this.width.value = Number(this.packOptions.width) || 0;
+		this.height.value = Number(this.packOptions.height) || 0;
+		this.fixedSize.checked = this.packOptions.fixedSize;
+		this.powerOfTwo.checked = this.packOptions.powerOfTwo;
+		this.padding.value = Number(this.packOptions.padding) || 0;
+		this.extrude.value = Number(this.packOptions.extrude) || 0;
+		this.allowRotation.checked = this.packOptions.allowRotation;
+		this.allowTrim.checked = this.packOptions.allowTrim;
+		this.trimMode.value = this.packOptions.trimMode;
+		this.alphaThreshold.value = this.packOptions.alphaThreshold || 0;
+		this.detectIdentical.checked = this.packOptions.detectIdentical;
+		this.packer.value = this.packOptions.packer;
+		this.packerMethod.value = this.packOptions.packerMethod;
 	}
 
 	getPackOptions() {
@@ -226,11 +207,9 @@ class PackProperties extends React.Component {
 	}
 
 	onExporterChanged() {
-		const exporter = getExporterByType(
-			ReactDOM.findDOMNode(this.refs.exporter).value,
-		);
-		const allowTrimInput = ReactDOM.findDOMNode(this.refs.allowTrim);
-		const allowRotationInput = ReactDOM.findDOMNode(this.refs.allowRotation);
+		const exporter = getExporterByType(this.exporter.value);
+		const allowTrimInput = this.allowTrim;
+		const allowRotationInput = this.allowRotation;
 
 		const doRefresh =
 			allowTrimInput.checked !== exporter.allowTrim ||
@@ -246,10 +225,8 @@ class PackProperties extends React.Component {
 	}
 
 	updateEditCustomTemplateButton() {
-		const exporter = getExporterByType(
-			ReactDOM.findDOMNode(this.refs.exporter).value,
-		);
-		ReactDOM.findDOMNode(this.refs.editCustomFormat).style.visibility =
+		const exporter = getExporterByType(this.exporter.value);
+		this.editCustomFormat.style.visibility =
 			exporter.type === "custom" ? "visible" : "hidden";
 	}
 
@@ -278,7 +255,7 @@ class PackProperties extends React.Component {
 	selectSavePath() {
 		const dir = FileSystem.selectFolder();
 		if (dir) {
-			ReactDOM.findDOMNode(this.refs.savePath).value = dir;
+			this.savePath.value = dir;
 			this.onExporterPropChanged();
 		}
 	}
@@ -300,7 +277,7 @@ class PackProperties extends React.Component {
 								<td>{I18.f("TEXTURE_NAME")}</td>
 								<td>
 									<input
-										ref="textureName"
+										ref={(textureName) => (this.textureName = textureName)}
 										type="text"
 										className="border-color-gray"
 										defaultValue={this.packOptions.textureName}
@@ -313,7 +290,9 @@ class PackProperties extends React.Component {
 								<td>{I18.f("TEXTURE_FORMAT")}</td>
 								<td>
 									<select
-										ref="textureFormat"
+										ref={(textureFormat) =>
+											(this.textureFormat = textureFormat)
+										}
 										className="border-color-gray"
 										defaultValue={this.packOptions.textureFormat}
 										onChange={this.onExporterChanged}
@@ -328,7 +307,9 @@ class PackProperties extends React.Component {
 								<td>{I18.f("REMOVE_FILE_EXT")}</td>
 								<td>
 									<input
-										ref="removeFileExtension"
+										ref={(removeFileExtension) =>
+											(this.removeFileExtension = removeFileExtension)
+										}
 										className="border-color-gray"
 										type="checkbox"
 										defaultChecked={
@@ -343,7 +324,9 @@ class PackProperties extends React.Component {
 								<td>{I18.f("PREPEND_FOLDER")}</td>
 								<td>
 									<input
-										ref="prependFolderName"
+										ref={(prependFolderName) =>
+											(this.prependFolderName = prependFolderName)
+										}
 										className="border-color-gray"
 										type="checkbox"
 										defaultChecked={
@@ -358,7 +341,7 @@ class PackProperties extends React.Component {
 								<td>{I18.f("BASE64_EXPORT")}</td>
 								<td>
 									<input
-										ref="base64Export"
+										ref={(base64Export) => (this.base64Export = base64Export)}
 										className="border-color-gray"
 										type="checkbox"
 										defaultChecked={
@@ -373,7 +356,7 @@ class PackProperties extends React.Component {
 								<td>{I18.f("TINIFY")}</td>
 								<td>
 									<input
-										ref="tinify"
+										ref={(tinify) => (this.tinify = tinify)}
 										className="border-color-gray"
 										type="checkbox"
 										defaultChecked={this.packOptions.tinify ? "checked" : ""}
@@ -386,7 +369,7 @@ class PackProperties extends React.Component {
 								<td>{I18.f("TINIFY_KEY")}</td>
 								<td>
 									<input
-										ref="tinifyKey"
+										ref={(tinifyKey) => (this.tinifyKey = tinifyKey)}
 										type="text"
 										className="border-color-gray"
 										defaultValue={this.packOptions.tinifyKey}
@@ -399,7 +382,7 @@ class PackProperties extends React.Component {
 								<td>{I18.f("SCALE")}</td>
 								<td>
 									<input
-										ref="scale"
+										ref={(scale) => (this.scale = scale)}
 										type="number"
 										min="0"
 										className="border-color-gray"
@@ -413,7 +396,7 @@ class PackProperties extends React.Component {
 								<td>{I18.f("FILTER")}</td>
 								<td>
 									<select
-										ref="filter"
+										ref={(filter) => (this.filter = filter)}
 										className="border-color-gray"
 										onChange={this.onExporterChanged}
 										defaultValue={this.packOptions.filter}
@@ -436,7 +419,7 @@ class PackProperties extends React.Component {
 								<td>{I18.f("FORMAT")}</td>
 								<td>
 									<select
-										ref="exporter"
+										ref={(exporter) => (this.exporter = exporter)}
 										className="border-color-gray"
 										onChange={this.onExporterChanged}
 										defaultValue={this.packOptions.exporter}
@@ -456,7 +439,9 @@ class PackProperties extends React.Component {
 								<td>
 									<div
 										className="edit-btn back-800"
-										ref="editCustomFormat"
+										ref={(editCustomFormat) =>
+											(this.editCustomFormat = editCustomFormat)
+										}
 										onClick={this.editCustomExporter}
 									></div>
 								</td>
@@ -465,7 +450,7 @@ class PackProperties extends React.Component {
 								<td>{I18.f("FILE_NAME")}</td>
 								<td>
 									<input
-										ref="fileName"
+										ref={(fileName) => (this.fileName = fileName)}
 										className="border-color-gray"
 										type="text"
 										defaultValue={this.packOptions.fileName}
@@ -489,7 +474,7 @@ class PackProperties extends React.Component {
 								<td>{I18.f("WIDTH")}</td>
 								<td>
 									<input
-										ref="width"
+										ref={(width) => (this.width = width)}
 										type="number"
 										min="0"
 										className="border-color-gray"
@@ -504,7 +489,7 @@ class PackProperties extends React.Component {
 								<td>{I18.f("HEIGHT")}</td>
 								<td>
 									<input
-										ref="height"
+										ref={(height) => (this.height = height)}
 										type="number"
 										min="0"
 										className="border-color-gray"
@@ -519,7 +504,7 @@ class PackProperties extends React.Component {
 								<td>{I18.f("FIXED_SIZE")}</td>
 								<td>
 									<input
-										ref="fixedSize"
+										ref={(fixedSize) => (this.fixedSize = fixedSize)}
 										type="checkbox"
 										className="border-color-gray"
 										onChange={this.onPropChanged}
@@ -532,7 +517,7 @@ class PackProperties extends React.Component {
 								<td>{I18.f("POWER_OF_TWO")}</td>
 								<td>
 									<input
-										ref="powerOfTwo"
+										ref={(powerOfTwo) => (this.powerOfTwo = powerOfTwo)}
 										type="checkbox"
 										className="border-color-gray"
 										onChange={this.onPropChanged}
@@ -547,7 +532,7 @@ class PackProperties extends React.Component {
 								<td>{I18.f("PADDING")}</td>
 								<td>
 									<input
-										ref="padding"
+										ref={(padding) => (this.padding = padding)}
 										type="number"
 										className="border-color-gray"
 										defaultValue={this.packOptions.padding}
@@ -562,7 +547,7 @@ class PackProperties extends React.Component {
 								<td>{I18.f("EXTRUDE")}</td>
 								<td>
 									<input
-										ref="extrude"
+										ref={(extrude) => (this.extrude = extrude)}
 										type="number"
 										className="border-color-gray"
 										defaultValue={this.packOptions.extrude}
@@ -577,7 +562,9 @@ class PackProperties extends React.Component {
 								<td>{I18.f("ALLOW_ROTATION")}</td>
 								<td>
 									<input
-										ref="allowRotation"
+										ref={(allowRotation) =>
+											(this.allowRotation = allowRotation)
+										}
 										type="checkbox"
 										className="border-color-gray"
 										onChange={this.onPropChanged}
@@ -591,7 +578,7 @@ class PackProperties extends React.Component {
 								<td>{I18.f("ALLOW_TRIM")}</td>
 								<td>
 									<input
-										ref="allowTrim"
+										ref={(allowTrim) => (this.allowTrim = allowTrim)}
 										type="checkbox"
 										className="border-color-gray"
 										onChange={this.onPropChanged}
@@ -605,7 +592,7 @@ class PackProperties extends React.Component {
 								<td>{I18.f("TRIM_MODE")}</td>
 								<td>
 									<select
-										ref="trimMode"
+										ref={(trimMode) => (this.trimMode = trimMode)}
 										className="border-color-gray"
 										onChange={this.onPropChanged}
 										defaultValue={this.packOptions.trimMode}
@@ -623,7 +610,9 @@ class PackProperties extends React.Component {
 								<td>{I18.f("ALPHA_THRESHOLD")}</td>
 								<td>
 									<input
-										ref="alphaThreshold"
+										ref={(alphaThreshold) =>
+											(this.alphaThreshold = alphaThreshold)
+										}
 										type="number"
 										className="border-color-gray"
 										defaultValue={this.packOptions.alphaThreshold}
@@ -639,7 +628,9 @@ class PackProperties extends React.Component {
 								<td>{I18.f("DETECT_IDENTICAL")}</td>
 								<td>
 									<input
-										ref="detectIdentical"
+										ref={(detectIdentical) =>
+											(this.detectIdentical = detectIdentical)
+										}
 										type="checkbox"
 										className="border-color-gray"
 										onChange={this.onPropChanged}
@@ -654,7 +645,7 @@ class PackProperties extends React.Component {
 								<td>{I18.f("PACKER")}</td>
 								<td>
 									<select
-										ref="packer"
+										ref={(packer) => (this.packer = packer)}
 										className="border-color-gray"
 										onChange={this.onPackerChange}
 										defaultValue={this.packOptions.packer}
@@ -677,7 +668,7 @@ class PackProperties extends React.Component {
 								<td>{I18.f("PACKER_METHOD")}</td>
 								<td>
 									<PackerMethods
-										ref="packerMethod"
+										ref={(packerMethod) => (this.packerMethod = packerMethod)}
 										packer={this.state.packer}
 										defaultMethod={this.packOptions.packerMethod}
 										handler={this.onPropChanged}

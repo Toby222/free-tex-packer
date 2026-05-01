@@ -13,8 +13,12 @@ import SheetSplitter from "./SheetSplitter.jsx";
 import Updater from "./Updater.jsx";
 
 class MainLayout extends React.Component {
+	static instance;
+
 	constructor(props) {
+		if (MainLayout.instance) throw new Error("Tried creating a second layout");
 		super(props);
+		MainLayout.instance = this;
 
 		this.state = {
 			messageBox: false,

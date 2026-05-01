@@ -1,6 +1,7 @@
 import Controller from "platform/Controller";
 import React from "react";
 import ReactDOM from "react-dom";
+import { createRoot } from "react-dom/client";
 import APP from "./APP";
 import { GLOBAL_EVENT, Observer } from "./Observer";
 import languages from "./resources/static/localization/languages.json";
@@ -9,7 +10,6 @@ import I18 from "./utils/I18";
 import Storage from "./utils/Storage";
 
 let app = null;
-let layout = null;
 
 const STORAGE_LANGUAGE_KEY = "language";
 
@@ -34,28 +34,20 @@ function loadLocalization() {
 
 function renderLayout() {
 	Controller.updateLocale();
-	layout = ReactDOM.render(
-		React.createElement(MainLayout),
-		document.getElementById("root"),
-	);
-}
-
-function injectCss(path) {
-	const el = document.createElement("link");
-	el.rel = "stylesheet";
-	el.type = "text/css";
-	el.href = path;
-	document.head.appendChild(el);
+	const container = document.getElementById("root");
+	const root = createRoot(container);
+	const mainLayout = React.createElement(MainLayout);
+	root.render(mainLayout);
 }
 
 function setLocale(locale) {
-	if (!layout) return;
+	if (!MainLayout.instance) return;
 
 	I18.init(locale);
 	I18.load(() => {
 		Storage.save(STORAGE_LANGUAGE_KEY, I18.currentLocale);
 		Controller.updateLocale();
-		layout.forceUpdate();
+		MainLayout.instance.forceUpdate();
 	});
 }
 

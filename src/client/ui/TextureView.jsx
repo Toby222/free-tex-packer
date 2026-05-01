@@ -18,7 +18,7 @@ class TextureView extends React.Component {
 	}
 
 	updateView() {
-		const view = ReactDOM.findDOMNode(this.refs.view);
+		const view = this.view;
 		if (view) {
 			view.width = this.props.data.buffer.width;
 			view.height = this.props.data.buffer.height;
@@ -96,7 +96,7 @@ class TextureView extends React.Component {
 				}
 			}
 
-			const back = ReactDOM.findDOMNode(this.refs.back);
+			const back = this.back;
 			back.className = "texture-view " + this.props.textureBack;
 		}
 	}
@@ -125,7 +125,7 @@ class TextureView extends React.Component {
 	onViewClick(e) {
 		let selectedItem = null;
 
-		const canvas = ReactDOM.findDOMNode(this.refs.view);
+		const canvas = this.view;
 		const rect = canvas.getBoundingClientRect();
 		const x = (e.clientX - rect.left) / this.props.scale;
 		const y = (e.clientY - rect.top) / this.props.scale;
@@ -180,8 +180,8 @@ class TextureView extends React.Component {
 
 	render() {
 		return (
-			<div ref="back" className="texture-view">
-				<canvas ref="view" onClick={this.onViewClick}>
+			<div ref={(back) => (this.back = back)} className="texture-view">
+				<canvas ref={(view) => (this.view = view)} onClick={this.onViewClick}>
 					{" "}
 				</canvas>
 			</div>

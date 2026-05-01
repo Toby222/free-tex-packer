@@ -25,7 +25,10 @@ class OldBrowserBlocker extends React.Component {
 
 		if (!ok) {
 			return (
-				<div ref="shader" className="old-browser-shader">
+				<div
+					ref={(shader) => (this.shader = shader)}
+					className="old-browser-shader"
+				>
 					<div className="old-browser-content">
 						{I18.f("OLD_BROWSER_MESSAGE1")}
 						<br />
