@@ -1,4 +1,4 @@
-import plist from "plist";
+import * as plist from "plist";
 import Splitter from "./Splitter";
 
 class UIKit extends Splitter {

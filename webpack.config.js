@@ -1,24 +1,28 @@
 const path = require("path");
-const webpack = require("webpack");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
-const argv = require("optimist").argv;
+
+const prodBuild = process.argv.includes("build")
 
 const entry = ["babel-polyfill", "./src/client/index"];
 
 const plugins = [];
 
-const output = argv.build ? "web/static/js/index.js" : "static/js/index.js";
-const NODE_ENV = argv.build ? "production" : "development";
-const devtool = argv.build ? "source-map" : "eval-source-map";
+const output = prodBuild ? "web/static/js/index.js" : "static/js/index.js";
+const NODE_ENV = prodBuild ? "production" : "development";
+const devtool = prodBuild ? "source-map" : "eval-source-map";
 
-if (!argv.build) {
-	entry.push("webpack-dev-server/client?http://localhost:4000");
+if (prodBuild) {
 	plugins.push(
-		new CopyWebpackPlugin([{ from: "src/client/resources", to: "./" }]),
+		new CopyWebpackPlugin({
+			patterns: [{ from: "src/client/resources", to: "web/" }]
+		}),
 	);
 } else {
+	entry.push("webpack-dev-server/client?http://localhost:4000");
 	plugins.push(
-		new CopyWebpackPlugin([{ from: "src/client/resources", to: "web/" }]),
+		new CopyWebpackPlugin({
+			patterns: [{ from: "src/client/resources", to: "./" }]
+		}),
 	);
 }
 
@@ -64,6 +68,11 @@ const config = {
 
 config.resolve = {
 	alias: { platform: path.resolve(__dirname, "./src/client/platform/web") },
+	fallback: {
+		timers: require.resolve("timers-browserify"),
+		stream: require.resolve("stream-browserify"),
+		buffer: require.resolve("buffer/"),
+	},
 };
 
 module.exports = config;
