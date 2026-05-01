@@ -122,12 +122,8 @@ class PackProperties extends React.Component {
 
 		data.textureName = this.textureName.value;
 		data.textureFormat = this.textureFormat.value;
-		data.removeFileExtension = ReactDOM.findDOMNode(
-			this.refs.removeFileExtension,
-		).checked;
-		data.prependFolderName = ReactDOM.findDOMNode(
-			this.refs.prependFolderName,
-		).checked;
+		data.removeFileExtension = this.removeFileExtension.checked;
+		data.prependFolderName = this.prependFolderName.checked;
 		data.base64Export = this.base64Export.checked;
 		data.tinify = this.tinify.checked;
 		data.tinifyKey = this.tinifyKey.value;
@@ -146,9 +142,7 @@ class PackProperties extends React.Component {
 		data.allowTrim = this.allowTrim.checked;
 		data.trimMode = this.trimMode.value;
 		data.alphaThreshold = this.alphaThreshold.value;
-		data.detectIdentical = ReactDOM.findDOMNode(
-			this.refs.detectIdentical,
-		).checked;
+		data.detectIdentical = this.detectIdentical;
 		data.packer = this.packer.value;
 		data.packerMethod = this.packerMethod.value;
 
@@ -178,7 +172,7 @@ class PackProperties extends React.Component {
 		this.allowTrim.checked = this.packOptions.allowTrim;
 		this.trimMode.value = this.packOptions.trimMode;
 		this.alphaThreshold.value = this.packOptions.alphaThreshold || 0;
-		this.detectIdentical.checked = this.packOptions.detectIdentical;
+		this.detectIdenticalRef.checked = this.packOptions.detectIdentical;
 		this.packer.value = this.packOptions.packer;
 		this.packerMethod.value = this.packOptions.packerMethod;
 	}
@@ -459,6 +453,24 @@ class PackProperties extends React.Component {
 								</td>
 								<td></td>
 							</tr>
+							<tr title={I18.f("SAVE_PATH_TITLE")} style={{ display: "none" }}>
+								<td>{I18.f("SAVE_PATH")}</td>
+								<td>
+									<input
+										ref={(savePath) => (this.savePath = savePath)}
+										className="border-color-gray"
+										type="text"
+										defaultValue={this.packOptions.savePath}
+										onBlur={this.onExporterPropChanged}
+									/>
+								</td>
+								<td>
+									<div
+										className="folder-btn back-800"
+										onClick={this.selectSavePath}
+									></div>
+								</td>
+							</tr>
 							<tr>
 								<td colSpan="3" className="center-align">
 									<div
@@ -628,8 +640,8 @@ class PackProperties extends React.Component {
 								<td>{I18.f("DETECT_IDENTICAL")}</td>
 								<td>
 									<input
-										ref={(detectIdentical) =>
-											(this.detectIdentical = detectIdentical)
+										ref={(detectIdenticalRef) =>
+											(this.detectIdenticalRef = detectIdenticalRef)
 										}
 										type="checkbox"
 										className="border-color-gray"
