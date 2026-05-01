@@ -1,117 +1,146 @@
 class Trimmer {
+	constructor() {}
 
-    constructor() {
+	static getAlpha(data, width, x, y) {
+		return data[y * (width * 4) + x * 4 + 3];
+	}
 
-    }
+	static getLeftSpace(data, width, height, threshold = 0) {
+		let x = 0;
 
-    static getAlpha(data, width, x, y) {
-        return data[((y * (width * 4)) + (x * 4)) + 3];
-    }
+		for (x = 0; x < width; x++) {
+			for (let y = 0; y < height; y++) {
+				if (Trimmer.getAlpha(data, width, x, y) > threshold) {
+					return x;
+				}
+			}
+		}
 
-    static getLeftSpace(data, width, height, threshold=0) {
-        let x = 0;
+		return 0;
+	}
 
-        for(x=0; x<width; x++) {
-            for(let y=0; y<height; y++) {
-                if(this.getAlpha(data, width, x, y) > threshold) {
-                    return x;
-                }
-            }
-        }
+	static getRightSpace(data, width, height, threshold = 0) {
+		let x = 0;
 
-        return 0;
-    }
+		for (x = width - 1; x >= 0; x--) {
+			for (let y = 0; y < height; y++) {
+				if (Trimmer.getAlpha(data, width, x, y) > threshold) {
+					return width - x - 1;
+				}
+			}
+		}
 
-    static getRightSpace(data, width, height, threshold=0) {
-        let x = 0;
+		return 0;
+	}
 
-        for(x=width-1; x>=0; x--) {
-            for(let y=0; y<height; y++) {
-                if(this.getAlpha(data, width, x, y) > threshold) {
-                    return width-x-1;
-                }
-            }
-        }
+	static getTopSpace(data, width, height, threshold = 0) {
+		let y = 0;
 
-        return 0;
-    }
+		for (y = 0; y < height; y++) {
+			for (let x = 0; x < width; x++) {
+				if (Trimmer.getAlpha(data, width, x, y) > threshold) {
+					return y;
+				}
+			}
+		}
 
-    static getTopSpace(data, width, height, threshold=0) {
-        let y = 0;
+		return 0;
+	}
 
-        for(y=0; y<height; y++) {
-            for(let x=0; x<width; x++) {
-                if(this.getAlpha(data, width, x, y) > threshold) {
-                    return y;
-                }
-            }
-        }
+	static getBottomSpace(data, width, height, threshold = 0) {
+		let y = 0;
 
-        return 0;
-    }
+		for (y = height - 1; y >= 0; y--) {
+			for (let x = 0; x < width; x++) {
+				if (Trimmer.getAlpha(data, width, x, y) > threshold) {
+					return height - y - 1;
+				}
+			}
+		}
 
-    static getBottomSpace(data, width, height, threshold=0) {
-        let y = 0;
+		return 0;
+	}
 
-        for(y=height-1; y>=0; y--) {
-            for(let x=0; x<width; x++) {
-                if(this.getAlpha(data, width, x, y) > threshold) {
-                    return height-y-1;
-                }
-            }
-        }
+	static trim(rects, threshold = 0) {
+		const cns = document.createElement("canvas");
+		const ctx = cns.getContext("2d");
 
-        return 0;
-    }
+		for (const item of rects) {
+			const img = item.image;
 
-    static trim(rects, threshold=0) {
+			cns.width = img.width;
+			cns.height = img.height;
 
-        let cns = document.createElement("canvas");
-        let ctx = cns.getContext("2d");
+			ctx.clearRect(0, 0, img.width, img.height);
 
-        for(let item of rects) {
+			ctx.drawImage(
+				img,
+				0,
+				0,
+				img.width,
+				img.height,
+				0,
+				0,
+				img.width,
+				img.height,
+			);
 
-            let img = item.image;
+			const data = ctx.getImageData(0, 0, img.width, img.height).data;
 
-            cns.width = img.width;
-            cns.height = img.height;
+			const spaces = { left: 0, right: 0, top: 0, bottom: 0 };
 
-            ctx.clearRect(0, 0, img.width, img.height);
+			spaces.left = Trimmer.getLeftSpace(
+				data,
+				img.width,
+				img.height,
+				threshold,
+			);
+			if (spaces.left !== img.width) {
+				spaces.right = Trimmer.getRightSpace(
+					data,
+					img.width,
+					img.height,
+					threshold,
+				);
+				spaces.top = Trimmer.getTopSpace(
+					data,
+					img.width,
+					img.height,
+					threshold,
+				);
+				spaces.bottom = Trimmer.getBottomSpace(
+					data,
+					img.width,
+					img.height,
+					threshold,
+				);
 
-            ctx.drawImage(img, 0, 0, img.width, img.height, 0, 0, img.width, img.height);
+				if (
+					spaces.left > 0 ||
+					spaces.right > 0 ||
+					spaces.top > 0 ||
+					spaces.bottom > 0
+				) {
+					item.trimmed = true;
+					item.spriteSourceSize.x = spaces.left;
+					item.spriteSourceSize.y = spaces.top;
+					item.spriteSourceSize.w = img.width - spaces.left - spaces.right;
+					item.spriteSourceSize.h = img.height - spaces.top - spaces.bottom;
+				}
+			} else {
+				item.trimmed = true;
+				item.spriteSourceSize.x = 0;
+				item.spriteSourceSize.y = 0;
+				item.spriteSourceSize.w = 1;
+				item.spriteSourceSize.h = 1;
+			}
 
-            let data = ctx.getImageData(0, 0, img.width, img.height).data;
-
-            let spaces = {left: 0, right: 0, top: 0, bottom: 0};
-
-            spaces.left = this.getLeftSpace(data, img.width, img.height, threshold);
-            if(spaces.left !== img.width) {
-                spaces.right = this.getRightSpace(data, img.width, img.height, threshold);
-                spaces.top = this.getTopSpace(data, img.width, img.height, threshold);
-                spaces.bottom = this.getBottomSpace(data, img.width, img.height, threshold);
-
-                if(spaces.left > 0 || spaces.right > 0 || spaces.top > 0 || spaces.bottom > 0) {
-                    item.trimmed = true;
-                    item.spriteSourceSize.x = spaces.left;
-                    item.spriteSourceSize.y = spaces.top;
-                    item.spriteSourceSize.w = img.width-spaces.left-spaces.right;
-                    item.spriteSourceSize.h = img.height-spaces.top-spaces.bottom;
-                }
-            }
-            else {
-                item.trimmed = true;
-                item.spriteSourceSize.x = 0;
-                item.spriteSourceSize.y = 0;
-                item.spriteSourceSize.w = 1;
-                item.spriteSourceSize.h = 1;
-            }
-
-            if(item.trimmed) {
-                item.frame.w = item.spriteSourceSize.w;
-                item.frame.h = item.spriteSourceSize.h;
-            }
-        }
-    }
+			if (item.trimmed) {
+				item.frame.w = item.spriteSourceSize.w;
+				item.frame.h = item.spriteSourceSize.h;
+			}
+		}
+	}
 }
 
 export default Trimmer;

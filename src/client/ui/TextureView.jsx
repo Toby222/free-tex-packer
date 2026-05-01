@@ -1,164 +1,192 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import {Observer, GLOBAL_EVENT} from '../Observer';
+import React from "react";
+import ReactDOM from "react-dom";
+import { GLOBAL_EVENT, Observer } from "../Observer";
 
 class TextureView extends React.Component {
-    constructor(props) {
-        super(props);
+	constructor(props) {
+		super(props);
 
-        this.onViewClick = this.onViewClick.bind(this);
-    }
+		this.onViewClick = this.onViewClick.bind(this);
+	}
 
-    componentDidMount() {
-        this.updateView();
-    }
+	componentDidMount() {
+		this.updateView();
+	}
 
-    componentDidUpdate() {
-        this.updateView();
-    }
+	componentDidUpdate() {
+		this.updateView();
+	}
 
-    updateView() {
-        let view = ReactDOM.findDOMNode(this.refs.view);
-        if(view) {
-            view.width = this.props.data.buffer.width;
-            view.height = this.props.data.buffer.height;
-            
-            view.style.width = Math.floor(view.width * this.props.scale) + "px";
-            view.style.height = Math.floor(view.height * this.props.scale) + "px";
+	updateView() {
+		const view = ReactDOM.findDOMNode(this.refs.view);
+		if (view) {
+			view.width = this.props.data.buffer.width;
+			view.height = this.props.data.buffer.height;
 
-            let ctx = view.getContext("2d");
+			view.style.width = Math.floor(view.width * this.props.scale) + "px";
+			view.style.height = Math.floor(view.height * this.props.scale) + "px";
 
-            ctx.clearRect(0, 0, view.width, view.height);
+			const ctx = view.getContext("2d");
 
-            if(this.props.selectedImages.length) {
-                ctx.globalAlpha = 0.35;
-            }
+			ctx.clearRect(0, 0, view.width, view.height);
 
-            ctx.drawImage(this.props.data.buffer, 0, 0, view.width, view.height, 0, 0, view.width, view.height);
+			if (this.props.selectedImages.length) {
+				ctx.globalAlpha = 0.35;
+			}
 
-            if(this.props.displayOutline) {
-                for (let item of this.props.data.data) {
-                    if(!item.cloned) {
-                        this.drawOutline(ctx, item);
-                    }
-                }
-            }
+			ctx.drawImage(
+				this.props.data.buffer,
+				0,
+				0,
+				view.width,
+				view.height,
+				0,
+				0,
+				view.width,
+				view.height,
+			);
 
-            ctx.globalAlpha = 1;
+			if (this.props.displayOutline) {
+				for (const item of this.props.data.data) {
+					if (!item.cloned) {
+						this.drawOutline(ctx, item);
+					}
+				}
+			}
 
-            for (let item of this.props.data.data) {
-                if(this.props.selectedImages.indexOf(item.file) >= 0 || this.props.selectedImages.indexOf(item.originalFile) >= 0) {
-                    let frame = item.frame;
+			ctx.globalAlpha = 1;
 
-                    let w = frame.w, h = frame.h;
-                    if(item.rotated) {
-                        w = frame.h;
-                        h = frame.w;
-                    }
+			for (const item of this.props.data.data) {
+				if (
+					this.props.selectedImages.indexOf(item.file) >= 0 ||
+					this.props.selectedImages.indexOf(item.originalFile) >= 0
+				) {
+					const frame = item.frame;
 
-                    ctx.clearRect(frame.x, frame.y, w, h);
-                    ctx.drawImage(this.props.data.buffer, frame.x, frame.y, w, h, frame.x, frame.y, w, h);
+					let w = frame.w,
+						h = frame.h;
+					if (item.rotated) {
+						w = frame.h;
+						h = frame.w;
+					}
 
-                    if(this.props.displayOutline) this.drawOutline(ctx, item);
+					ctx.clearRect(frame.x, frame.y, w, h);
+					ctx.drawImage(
+						this.props.data.buffer,
+						frame.x,
+						frame.y,
+						w,
+						h,
+						frame.x,
+						frame.y,
+						w,
+						h,
+					);
 
-                    ctx.beginPath();
+					if (this.props.displayOutline) this.drawOutline(ctx, item);
 
-                    if(ctx.setLineDash) ctx.setLineDash([4, 2]);
-                    ctx.strokeStyle = "#000";
-                    ctx.lineWidth = 1;
-                    ctx.rect(frame.x, frame.y, w, h);
+					ctx.beginPath();
 
-                    ctx.stroke();
-                }
-            }
+					if (ctx.setLineDash) ctx.setLineDash([4, 2]);
+					ctx.strokeStyle = "#000";
+					ctx.lineWidth = 1;
+					ctx.rect(frame.x, frame.y, w, h);
 
-            let back = ReactDOM.findDOMNode(this.refs.back);
-            back.className = "texture-view " + this.props.textureBack;
-        }
-    }
+					ctx.stroke();
+				}
+			}
 
-    drawOutline(ctx, item) {
-        let frame = item.frame;
-        let w = frame.w, h = frame.h;
-        if(item.rotated) {
-            w = frame.h;
-            h = frame.w;
-        }
+			const back = ReactDOM.findDOMNode(this.refs.back);
+			back.className = "texture-view " + this.props.textureBack;
+		}
+	}
 
-        ctx.strokeStyle = "#00F";
-        ctx.fillStyle = "rgba(0,0,255,0.25)";
-        ctx.lineWidth = 1;
+	drawOutline(ctx, item) {
+		const frame = item.frame;
+		let w = frame.w,
+			h = frame.h;
+		if (item.rotated) {
+			w = frame.h;
+			h = frame.w;
+		}
 
-        ctx.beginPath();
-        ctx.fillRect(frame.x, frame.y, w, h);
-        ctx.rect(frame.x, frame.y, w, h);
-        ctx.moveTo(frame.x, frame.y);
-        ctx.lineTo(frame.x + w, frame.y + h);
-        ctx.stroke();
-    }
+		ctx.strokeStyle = "#00F";
+		ctx.fillStyle = "rgba(0,0,255,0.25)";
+		ctx.lineWidth = 1;
 
-    onViewClick(e) {
-        let selectedItem = null;
+		ctx.beginPath();
+		ctx.fillRect(frame.x, frame.y, w, h);
+		ctx.rect(frame.x, frame.y, w, h);
+		ctx.moveTo(frame.x, frame.y);
+		ctx.lineTo(frame.x + w, frame.y + h);
+		ctx.stroke();
+	}
 
-        let canvas = ReactDOM.findDOMNode(this.refs.view);
-        let rect = canvas.getBoundingClientRect();
-        let x = (e.clientX - rect.left) / this.props.scale;
-        let y = (e.clientY - rect.top) / this.props.scale;
+	onViewClick(e) {
+		let selectedItem = null;
 
-        for (let item of this.props.data.data) {
-            let w = item.frame.w;
-            let h = item.frame.h;
-            if(item.rotated) {
-                w = item.frame.h;
-                h = item.frame.w;
-            }
+		const canvas = ReactDOM.findDOMNode(this.refs.view);
+		const rect = canvas.getBoundingClientRect();
+		const x = (e.clientX - rect.left) / this.props.scale;
+		const y = (e.clientY - rect.top) / this.props.scale;
 
-            if(x >= item.frame.x &&
-               x < item.frame.x + w &&
-               y >= item.frame.y &&
-               y < item.frame.y + h
-            ) {
-                selectedItem = item;
-                break;
-            }
-        }
+		for (const item of this.props.data.data) {
+			let w = item.frame.w;
+			let h = item.frame.h;
+			if (item.rotated) {
+				w = item.frame.h;
+				h = item.frame.w;
+			}
 
-        if(selectedItem) {
-            Observer.emit(GLOBAL_EVENT.IMAGE_ITEM_SELECTED, {
-                isFolder: false,
-                path: selectedItem.file,
-                ctrlKey: e.ctrlKey || e.shiftKey,
-                shiftKey: false
-            });
-            
-            this.selectCloned(selectedItem);
-        }
+			if (
+				x >= item.frame.x &&
+				x < item.frame.x + w &&
+				y >= item.frame.y &&
+				y < item.frame.y + h
+			) {
+				selectedItem = item;
+				break;
+			}
+		}
 
-        e.preventDefault();
-        e.stopPropagation();
-        return false;
-    }
-    
-    selectCloned(selectedItem) {
-        for (let item of this.props.data.data) {
-            if(item.cloned && item.file === selectedItem.file) {
-                Observer.emit(GLOBAL_EVENT.IMAGE_ITEM_SELECTED, {
-                    isFolder: false,
-                    path: item.originalFile,
-                    ctrlKey: true,
-                    shiftKey: false
-                });
-            }
-        }
-    }
+		if (selectedItem) {
+			Observer.emit(GLOBAL_EVENT.IMAGE_ITEM_SELECTED, {
+				isFolder: false,
+				path: selectedItem.file,
+				ctrlKey: e.ctrlKey || e.shiftKey,
+				shiftKey: false,
+			});
 
-    render() {
-        return (
-            <div ref="back" className="texture-view">
-                <canvas ref="view" onClick={this.onViewClick}> </canvas>
-            </div>
-        );
-    }
+			this.selectCloned(selectedItem);
+		}
+
+		e.preventDefault();
+		e.stopPropagation();
+		return false;
+	}
+
+	selectCloned(selectedItem) {
+		for (const item of this.props.data.data) {
+			if (item.cloned && item.file === selectedItem.file) {
+				Observer.emit(GLOBAL_EVENT.IMAGE_ITEM_SELECTED, {
+					isFolder: false,
+					path: item.originalFile,
+					ctrlKey: true,
+					shiftKey: false,
+				});
+			}
+		}
+	}
+
+	render() {
+		return (
+			<div ref="back" className="texture-view">
+				<canvas ref="view" onClick={this.onViewClick}>
+					{" "}
+				</canvas>
+			</div>
+		);
+	}
 }
 
 export default TextureView;

@@ -1,211 +1,258 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import I18 from '../utils/I18';
-import {GLOBAL_EVENT, Observer} from "../Observer";
-import {smartSortImages} from '../utils/common';
+import React from "react";
+import ReactDOM from "react-dom";
+import { GLOBAL_EVENT, Observer } from "../Observer";
+import { smartSortImages } from "../utils/common";
+import I18 from "../utils/I18";
 
 class SpritesPlayer extends React.Component {
-    
-    constructor(props) {
-        super(props);
-                
-        this.textures = [];
+	constructor(props) {
+		super(props);
 
-        this.currentTextures = [];
-        this.currentFrame = 0;
+		this.textures = [];
 
-        this.width = 0;
-        this.height = 0;
-        
-        this.updateTimer = null;
-        
-        this.selectedImages = [];
+		this.currentTextures = [];
+		this.currentFrame = 0;
 
-        this.update = this.update.bind(this);
-        this.forceUpdate = this.forceUpdate.bind(this);
-        this.updateCurrentTextures = this.updateCurrentTextures.bind(this);
-        this.onSpeedChange = this.onSpeedChange.bind(this);
+		this.width = 0;
+		this.height = 0;
 
-        Observer.on(GLOBAL_EVENT.IMAGES_LIST_SELECTED_CHANGED, this.onImagesSelected, this);
-    }
+		this.updateTimer = null;
 
-    onImagesSelected(list=[]) {
-        this.selectedImages = list;
-        this.updateCurrentTextures();
-    }
-    
-    componentDidMount() {
-        if(this.props.start) this.setup();
-        else this.stop();
-    }
+		this.selectedImages = [];
 
-    componentDidUpdate() {
-        if(this.props.start) this.setup();
-        else this.stop();
-    }
-    
-    setup() {
-        ReactDOM.findDOMNode(this.refs.playerContainer).className = "player-view-container " + this.props.textureBack;
-        
-        this.textures = [];
-        
-        if(!this.props.data) return;
+		this.update = this.update.bind(this);
+		this.forceUpdate = this.forceUpdate.bind(this);
+		this.updateCurrentTextures = this.updateCurrentTextures.bind(this);
+		this.onSpeedChange = this.onSpeedChange.bind(this);
 
-        this.width = 0;
-        this.height = 0;
-        
-        for(let part of this.props.data) {
-            let baseTexture = part.buffer;
+		Observer.on(
+			GLOBAL_EVENT.IMAGES_LIST_SELECTED_CHANGED,
+			this.onImagesSelected,
+			this,
+		);
+	}
 
-            for (let config of part.data) {
+	onImagesSelected(list = []) {
+		this.selectedImages = list;
+		this.updateCurrentTextures();
+	}
 
-                if (this.width < config.sourceSize.w) this.width = config.sourceSize.w;
-                if (this.height < config.sourceSize.h) this.height = config.sourceSize.h;
+	componentDidMount() {
+		if (this.props.start) this.setup();
+		else this.stop();
+	}
 
-                this.textures.push({
-                    config: config,
-                    baseTexture: baseTexture
-                });
-            }
-        }
+	componentDidUpdate() {
+		if (this.props.start) this.setup();
+		else this.stop();
+	}
 
-        if(this.width < 256) this.width = 256;
-        if(this.height < 200) this.height = 200;
+	setup() {
+		ReactDOM.findDOMNode(this.refs.playerContainer).className =
+			"player-view-container " + this.props.textureBack;
 
-        let canvas = ReactDOM.findDOMNode(this.refs.view);
-        canvas.width = this.width;
-        canvas.height = this.height;
-        
-        this.updateCurrentTextures();
-    }
+		this.textures = [];
 
-    forceUpdate(e) {
-        let key = e.keyCode || e.which;
-        if(key === 13) this.updateCurrentTextures();
-    }
+		if (!this.props.data) return;
 
-    onSpeedChange(e)
-    {
-        this.refs.fps.innerHTML = e.target.value + " fps";
-    }
+		this.width = 0;
+		this.height = 0;
 
-    updateCurrentTextures() {
-        let textures = [];
+		for (const part of this.props.data) {
+			const baseTexture = part.buffer;
 
-        for(let tex of this.textures) {
-            if(!tex.config.cloned && this.selectedImages.indexOf(tex.config.file) >= 0) {
-                textures.push(tex);
-            }
+			for (const config of part.data) {
+				if (this.width < config.sourceSize.w) this.width = config.sourceSize.w;
+				if (this.height < config.sourceSize.h)
+					this.height = config.sourceSize.h;
 
-            if(tex.config.cloned && this.selectedImages.indexOf(tex.config.originalFile) >= 0) {
-                textures.push(tex);
-            }
-        }
-        
-        textures = textures.sort((a, b) => {
-            return smartSortImages(a.config.name, b.config.name);
-        });
+				this.textures.push({
+					config: config,
+					baseTexture: baseTexture,
+				});
+			}
+		}
 
-        this.currentTextures = textures;
-        this.currentFrame = 0;
-        this.update(true);
-    }
-    
-    update(skipFrameUpdate) {
-        clearTimeout(this.updateTimer);
+		if (this.width < 256) this.width = 256;
+		if (this.height < 200) this.height = 200;
 
-        if(!skipFrameUpdate){
-            this.currentFrame++;
-            if(this.currentFrame >= this.currentTextures.length) {
-                this.currentFrame = 0;
-            }
-        }
-        this.renderTexture();
+		const canvas = ReactDOM.findDOMNode(this.refs.view);
+		canvas.width = this.width;
+		canvas.height = this.height;
 
-        this.updateTimer = setTimeout(this.update, 1000 / ReactDOM.findDOMNode(this.refs.speed).value);
-    }
+		this.updateCurrentTextures();
+	}
 
-    renderTexture() {
-        let ctx = ReactDOM.findDOMNode(this.refs.view).getContext("2d");
+	forceUpdate(e) {
+		const key = e.keyCode || e.which;
+		if (key === 13) this.updateCurrentTextures();
+	}
 
-        ctx.clearRect(0, 0, this.width, this.height);
+	onSpeedChange(e) {
+		this.refs.fps.innerHTML = e.target.value + " fps";
+	}
 
-        let texture = this.currentTextures[this.currentFrame];
-        if(!texture) return;
-        
-        let buffer = ReactDOM.findDOMNode(this.refs.buffer);
-        buffer.width = texture.config.sourceSize.w;
-        buffer.height = texture.config.sourceSize.h;
-        
-        let bufferCtx = buffer.getContext("2d");
-        bufferCtx.clearRect(0, 0, texture.config.sourceSize.w, texture.config.sourceSize.h);
+	updateCurrentTextures() {
+		let textures = [];
 
-        let x = this.width/2, y = this.height/2;
+		for (const tex of this.textures) {
+			if (
+				!tex.config.cloned &&
+				this.selectedImages.indexOf(tex.config.file) >= 0
+			) {
+				textures.push(tex);
+			}
 
-        if(texture.config.rotated) {
-            bufferCtx.save();
+			if (
+				tex.config.cloned &&
+				this.selectedImages.indexOf(tex.config.originalFile) >= 0
+			) {
+				textures.push(tex);
+			}
+		}
 
-            bufferCtx.translate(texture.config.spriteSourceSize.x + texture.config.spriteSourceSize.w/2, texture.config.spriteSourceSize.y + texture.config.spriteSourceSize.h/2);
-            bufferCtx.rotate(-Math.PI/2);
+		textures = textures.sort((a, b) => {
+			return smartSortImages(a.config.name, b.config.name);
+		});
 
-            bufferCtx.drawImage(texture.baseTexture,
-                texture.config.frame.x, texture.config.frame.y,
-                texture.config.frame.h, texture.config.frame.w,
-                -texture.config.spriteSourceSize.h/2, -texture.config.spriteSourceSize.w/2,
-                texture.config.spriteSourceSize.h, texture.config.spriteSourceSize.w);
+		this.currentTextures = textures;
+		this.currentFrame = 0;
+		this.update(true);
+	}
 
-            bufferCtx.restore();
-        }
-        else {
-            bufferCtx.drawImage(texture.baseTexture,
-                texture.config.frame.x, texture.config.frame.y,
-                texture.config.frame.w, texture.config.frame.h,
-                texture.config.spriteSourceSize.x, texture.config.spriteSourceSize.y,
-                texture.config.spriteSourceSize.w, texture.config.spriteSourceSize.h);
-        }
+	update(skipFrameUpdate) {
+		clearTimeout(this.updateTimer);
 
-        ctx.drawImage(buffer,
-            0, 0,
-            texture.config.sourceSize.w, texture.config.sourceSize.h,
-            x - texture.config.sourceSize.w/2, y - texture.config.sourceSize.h/2,
-            texture.config.sourceSize.w, texture.config.sourceSize.h);
-    }
-    
-    stop() {
-        clearTimeout(this.updateTimer);
-    }
-    
-    render() {
-        return (
-            <div ref="container" className="player-container">
-                <div className="player-window border-color-gray">
-                    <div ref="playerContainer">
-                        <canvas ref="view"> </canvas>
-                        <canvas ref="buffer" className="player-buffer"> </canvas>
-                    </div>
-                    <div>
-                        <table>
-                            <tbody>
-                            <tr>
-                                <td>
-                                    {I18.f("ANIMATION_SPEED")}
-                                </td>
-                                <td>
-                                    <input type="range" ref="speed" max="60" min="1" defaultValue="10" onChange={this.onSpeedChange}/>                                    
-                                </td>
-                                <td>                                    
-                                    <div ref="fps" className="player-fps">10 fps</div>                                    
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
-                        
-                    </div>
-                </div>
-            </div>
-        )
-    }
-    
+		if (!skipFrameUpdate) {
+			this.currentFrame++;
+			if (this.currentFrame >= this.currentTextures.length) {
+				this.currentFrame = 0;
+			}
+		}
+		this.renderTexture();
+
+		this.updateTimer = setTimeout(
+			this.update,
+			1000 / ReactDOM.findDOMNode(this.refs.speed).value,
+		);
+	}
+
+	renderTexture() {
+		const ctx = ReactDOM.findDOMNode(this.refs.view).getContext("2d");
+
+		ctx.clearRect(0, 0, this.width, this.height);
+
+		const texture = this.currentTextures[this.currentFrame];
+		if (!texture) return;
+
+		const buffer = ReactDOM.findDOMNode(this.refs.buffer);
+		buffer.width = texture.config.sourceSize.w;
+		buffer.height = texture.config.sourceSize.h;
+
+		const bufferCtx = buffer.getContext("2d");
+		bufferCtx.clearRect(
+			0,
+			0,
+			texture.config.sourceSize.w,
+			texture.config.sourceSize.h,
+		);
+
+		const x = this.width / 2,
+			y = this.height / 2;
+
+		if (texture.config.rotated) {
+			bufferCtx.save();
+
+			bufferCtx.translate(
+				texture.config.spriteSourceSize.x +
+					texture.config.spriteSourceSize.w / 2,
+				texture.config.spriteSourceSize.y +
+					texture.config.spriteSourceSize.h / 2,
+			);
+			bufferCtx.rotate(-Math.PI / 2);
+
+			bufferCtx.drawImage(
+				texture.baseTexture,
+				texture.config.frame.x,
+				texture.config.frame.y,
+				texture.config.frame.h,
+				texture.config.frame.w,
+				-texture.config.spriteSourceSize.h / 2,
+				-texture.config.spriteSourceSize.w / 2,
+				texture.config.spriteSourceSize.h,
+				texture.config.spriteSourceSize.w,
+			);
+
+			bufferCtx.restore();
+		} else {
+			bufferCtx.drawImage(
+				texture.baseTexture,
+				texture.config.frame.x,
+				texture.config.frame.y,
+				texture.config.frame.w,
+				texture.config.frame.h,
+				texture.config.spriteSourceSize.x,
+				texture.config.spriteSourceSize.y,
+				texture.config.spriteSourceSize.w,
+				texture.config.spriteSourceSize.h,
+			);
+		}
+
+		ctx.drawImage(
+			buffer,
+			0,
+			0,
+			texture.config.sourceSize.w,
+			texture.config.sourceSize.h,
+			x - texture.config.sourceSize.w / 2,
+			y - texture.config.sourceSize.h / 2,
+			texture.config.sourceSize.w,
+			texture.config.sourceSize.h,
+		);
+	}
+
+	stop() {
+		clearTimeout(this.updateTimer);
+	}
+
+	render() {
+		return (
+			<div ref="container" className="player-container">
+				<div className="player-window border-color-gray">
+					<div ref="playerContainer">
+						<canvas ref="view"> </canvas>
+						<canvas ref="buffer" className="player-buffer">
+							{" "}
+						</canvas>
+					</div>
+					<div>
+						<table>
+							<tbody>
+								<tr>
+									<td>{I18.f("ANIMATION_SPEED")}</td>
+									<td>
+										<input
+											type="range"
+											ref="speed"
+											max="60"
+											min="1"
+											defaultValue="10"
+											onChange={this.onSpeedChange}
+										/>
+									</td>
+									<td>
+										<div ref="fps" className="player-fps">
+											10 fps
+										</div>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		);
+	}
 }
 
 export default SpritesPlayer;

@@ -1,24 +1,21 @@
-import JSZip from 'jszip';
-import FileSaver from 'file-saver';
+import FileSaver from "file-saver";
+import JSZip from "jszip";
 
 class Downloader {
+	static run(files, fileName) {
+		const zip = new JSZip();
 
-    static run(files, fileName) {
+		for (const file of files) {
+			zip.file(file.name, file.content, { base64: !!file.base64 });
+		}
 
-        let zip = new JSZip();
+		const ext = fileName.split(".").pop();
+		if (ext !== "zip") fileName = fileName + ".zip";
 
-        for(let file of files) {
-            zip.file(file.name, file.content, {base64: !!file.base64});
-        }
-
-        let ext = fileName.split(".").pop();
-        if(ext !== "zip") fileName = fileName + ".zip";
-
-        zip.generateAsync({type:"blob"}).then((content) => {
-            FileSaver.saveAs(content, fileName);
-        });
-    }
-
+		zip.generateAsync({ type: "blob" }).then((content) => {
+			FileSaver.saveAs(content, fileName);
+		});
+	}
 }
 
 export default Downloader;

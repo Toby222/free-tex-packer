@@ -1,39 +1,37 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React from "react";
+import ReactDOM from "react-dom";
 
-import I18 from '../utils/I18';
+import I18 from "../utils/I18";
 
 class ProcessingShader extends React.Component {
-    constructor(props) {
-        super(props);
-        
-        this.showTimer = null;
-    }
+	constructor(props) {
+		super(props);
 
-    componentDidMount() {
-        let shader = ReactDOM.findDOMNode(this.refs.shader);
-        if(shader) {
-            shader.style.visibility = "hidden";
+		this.showTimer = null;
+	}
 
-            this.showTimer = setTimeout(() => {
-                shader.style.visibility = "visible";
-            }, 100);
-        }
-    }
+	componentDidMount() {
+		const shader = ReactDOM.findDOMNode(this.refs.shader);
+		if (shader) {
+			shader.style.visibility = "hidden";
 
-    componentWillUnmount() {
-        clearTimeout(this.showTimer);
-    }
+			this.showTimer = setTimeout(() => {
+				shader.style.visibility = "visible";
+			}, 100);
+		}
+	}
 
-    render() {
-        return (
-            <div ref="shader" className="processing-shader color-white">
-                <div className="processing-content">
-                    {I18.f("PLEASE_WAIT")}
-                </div>
-            </div>
-        );
-    }
+	componentWillUnmount() {
+		clearTimeout(this.showTimer);
+	}
+
+	render() {
+		return (
+			<div ref="shader" className="processing-shader color-white">
+				<div className="processing-content">{I18.f("PLEASE_WAIT")}</div>
+			</div>
+		);
+	}
 }
 
 export default ProcessingShader;

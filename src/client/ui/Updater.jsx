@@ -1,91 +1,121 @@
-import React from 'react';
+import React from "react";
 
-import {Observer, GLOBAL_EVENT} from '../Observer';
-import Storage from '../utils/Storage';
-import I18 from '../utils/I18';
+import { GLOBAL_EVENT, Observer } from "../Observer";
+import I18 from "../utils/I18";
+import Storage from "../utils/Storage";
 
 const STORAGE_SKIPPED_VERSIONS_KEY = "skipped-versions";
 
 class Updater extends React.Component {
-    constructor(props) {
-        super(props);
+	constructor(props) {
+		super(props);
 
-        this.state = {
-            installation: false,
-            downloadProgress: 0
-        };
-        
-        this.close = this.close.bind(this);
-        this.skip = this.skip.bind(this);
-        this.doSkip = this.doSkip.bind(this);
-        this.install = this.install.bind(this);
-        
-        Observer.on(GLOBAL_EVENT.DOWNLOAD_PROGRESS_CHANGED, this.changeDownloadProgress, this);
-        
-        this.skippedVersion = Storage.load(STORAGE_SKIPPED_VERSIONS_KEY);
-        if(!Array.isArray(this.skippedVersion)) this.skippedVersion = [];
-        
-        if(this.skippedVersion.indexOf(this.props.data.releaseName) >= 0) this.close();
-    }
+		this.state = {
+			installation: false,
+			downloadProgress: 0,
+		};
 
-    close() {
-        Observer.off(GLOBAL_EVENT.DOWNLOAD_PROGRESS_CHANGED, this.changeDownloadProgress, this);
-        Observer.emit(GLOBAL_EVENT.HIDE_UPDATER);
-    }
-    
-    skip() {
-        let buttons = {
-            "yes": {caption: I18.f("YES"), callback: this.doSkip},
-            "no": {caption: I18.f("NO")}
-        };
+		this.close = this.close.bind(this);
+		this.skip = this.skip.bind(this);
+		this.doSkip = this.doSkip.bind(this);
+		this.install = this.install.bind(this);
 
-        Observer.emit(GLOBAL_EVENT.SHOW_MESSAGE, I18.f("SKIP_VERSION_CONFIRM"), buttons);
-    }
+		Observer.on(
+			GLOBAL_EVENT.DOWNLOAD_PROGRESS_CHANGED,
+			this.changeDownloadProgress,
+			this,
+		);
 
-    doSkip() {
-        this.skippedVersion.push(this.props.data.releaseName);
-        Storage.save(STORAGE_SKIPPED_VERSIONS_KEY, this.skippedVersion);
-        this.close();
-    }
+		this.skippedVersion = Storage.load(STORAGE_SKIPPED_VERSIONS_KEY);
+		if (!Array.isArray(this.skippedVersion)) this.skippedVersion = [];
 
-    changeDownloadProgress(val) {
-        this.setState({downloadProgress: val});
-    }
+		if (this.skippedVersion.indexOf(this.props.data.releaseName) >= 0)
+			this.close();
+	}
 
-    install() {
-        this.setState({installation: true});
-        Observer.emit(GLOBAL_EVENT.INSTALL_UPDATE);
-    }
+	close() {
+		Observer.off(
+			GLOBAL_EVENT.DOWNLOAD_PROGRESS_CHANGED,
+			this.changeDownloadProgress,
+			this,
+		);
+		Observer.emit(GLOBAL_EVENT.HIDE_UPDATER);
+	}
 
-    render() {
-        return (
-            <div className="updater-shader">
-                <div className="updater-content">
+	skip() {
+		const buttons = {
+			yes: { caption: I18.f("YES"), callback: this.doSkip },
+			no: { caption: I18.f("NO") },
+		};
 
-                    <div className="updater-header">{I18.f("UPDATER_TITLE", this.props.data.releaseName)}</div>
-                    <div className="updater-release-notes" dangerouslySetInnerHTML={{ __html: this.props.data.releaseNotes }}></div>
-                    
-                    {
-                        this.state.installation
-                        ?
-                        (
-                            <div className="updater-download">
-                                <div ref="downloadProgress" className="updater-download-progress" style={{width: this.state.downloadProgress+"%"}}></div>
-                            </div>
-                        )
-                        :
-                        (
-                            <div className="updater-controls">
-                                <div className="btn back-600 border-color-gray color-white" onClick={this.close}>{I18.f("CLOSE")}</div>
-                                <div className="btn back-600 border-color-gray color-white" onClick={this.skip}>{I18.f("SKIP_VERSION")}</div>
-                                <div className="btn back-600 border-color-gray color-white" onClick={this.install}>{I18.f("INSTALL")}</div>
-                            </div>
-                        )
-                    }
-                </div>
-            </div>
-        );
-    }
+		Observer.emit(
+			GLOBAL_EVENT.SHOW_MESSAGE,
+			I18.f("SKIP_VERSION_CONFIRM"),
+			buttons,
+		);
+	}
+
+	doSkip() {
+		this.skippedVersion.push(this.props.data.releaseName);
+		Storage.save(STORAGE_SKIPPED_VERSIONS_KEY, this.skippedVersion);
+		this.close();
+	}
+
+	changeDownloadProgress(val) {
+		this.setState({ downloadProgress: val });
+	}
+
+	install() {
+		this.setState({ installation: true });
+		Observer.emit(GLOBAL_EVENT.INSTALL_UPDATE);
+	}
+
+	render() {
+		return (
+			<div className="updater-shader">
+				<div className="updater-content">
+					<div className="updater-header">
+						{I18.f("UPDATER_TITLE", this.props.data.releaseName)}
+					</div>
+					<div
+						className="updater-release-notes"
+						dangerouslySetInnerHTML={{ __html: this.props.data.releaseNotes }}
+					></div>
+
+					{this.state.installation ? (
+						<div className="updater-download">
+							<div
+								ref="downloadProgress"
+								className="updater-download-progress"
+								style={{ width: this.state.downloadProgress + "%" }}
+							></div>
+						</div>
+					) : (
+						<div className="updater-controls">
+							<div
+								className="btn back-600 border-color-gray color-white"
+								onClick={this.close}
+							>
+								{I18.f("CLOSE")}
+							</div>
+							<div
+								className="btn back-600 border-color-gray color-white"
+								onClick={this.skip}
+							>
+								{I18.f("SKIP_VERSION")}
+							</div>
+							<div
+								className="btn back-600 border-color-gray color-white"
+								onClick={this.install}
+							>
+								{I18.f("INSTALL")}
+							</div>
+						</div>
+					)}
+				</div>
+			</div>
+		);
+	}
 }
 
 export default Updater;

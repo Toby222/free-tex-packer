@@ -1,40 +1,37 @@
-import Splitter from './Splitter';
+import Splitter from "./Splitter";
 
 class JsonHash extends Splitter {
-    static check(data, cb) {
-        try {
-            let json = JSON.parse(data);
-            cb(json && json.frames && !Array.isArray(json.frames));
-        }
-        catch(e) {
-            cb(false);
-        }
-    }
-    
-    static split(data, options, cb) {
-        let res = [];
+	static check(data, cb) {
+		try {
+			const json = JSON.parse(data);
+			cb(json && json.frames && !Array.isArray(json.frames));
+		} catch (e) {
+			cb(false);
+		}
+	}
 
-        try {
-            let json = JSON.parse(data);
-            
-            let names = Object.keys(json.frames);
-            
-            for(let name of names) {
-                let item = json.frames[name];
+	static split(data, options, cb) {
+		const res = [];
 
-                item.name = Splitter.fixFileName(name);
-                res.push(item);
-            }
-        }
-        catch(e) {
-        }
+		try {
+			const json = JSON.parse(data);
 
-        cb(res);
-    }
+			const names = Object.keys(json.frames);
 
-    static get type() {
-        return 'JSON (hash)';
-    }
+			for (const name of names) {
+				const item = json.frames[name];
+
+				item.name = Splitter.fixFileName(name);
+				res.push(item);
+			}
+		} catch (e) {}
+
+		cb(res);
+	}
+
+	static get type() {
+		return "JSON (hash)";
+	}
 }
 
 export default JsonHash;

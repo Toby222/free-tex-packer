@@ -1,20 +1,16 @@
-import Filter from './Filter';
-import Mask from './Mask';
-import Grayscale from './Grayscale';
+import Filter from "./Filter";
+import Grayscale from "./Grayscale";
+import Mask from "./Mask";
 
-const list = [
-    Filter,
-    Mask,
-    Grayscale
-];
+const list = [Filter, Mask, Grayscale];
 
 function getFilterByType(type) {
-    for(let item of list) {
-        if(item.type === type) {
-            return item;
-        }
-    }
-    return null;
+	for (const item of list) {
+		if (item.type === type) {
+			return item;
+		}
+	}
+	return null;
 }
 
 export { getFilterByType };
