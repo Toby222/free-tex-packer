@@ -7,23 +7,17 @@ const entry = ["babel-polyfill", "./src/client/index"];
 
 const plugins = [];
 
-const output = prodBuild ? "web/static/js/index.js" : "static/js/index.js";
+const output = "static/js/index.js";
 const NODE_ENV = prodBuild ? "production" : "development";
 const devtool = prodBuild ? "source-map" : "eval-source-map";
+plugins.push(
+	new CopyWebpackPlugin({
+		patterns: [{ from: "src/client/resources", to: "./" }],
+	}),
+);
 
-if (prodBuild) {
-	plugins.push(
-		new CopyWebpackPlugin({
-			patterns: [{ from: "src/client/resources", to: "web/" }],
-		}),
-	);
-} else {
+if (!prodBuild) {
 	entry.push("webpack-dev-server/client?http://localhost:4000");
-	plugins.push(
-		new CopyWebpackPlugin({
-			patterns: [{ from: "src/client/resources", to: "./" }],
-		}),
-	);
 }
 
 const config = {
